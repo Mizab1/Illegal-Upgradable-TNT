@@ -1,13 +1,22 @@
-import type { SandstoneConfig } from 'sandstone'
+import type { SandstoneConfig } from "sandstone";
+import { addDependencies } from "./AddDependencies";
 
 export default {
-  name: 'Illegal Upgradable TNT',
-  description: [ 'A ', { text: 'Sandstone', color: 'gold' }, ' data pack.' ],
-  formatVersion: 7,
-  namespace: 'illegal_upgradale_tnt',
-  packUid: 'zIoSdkjJ',
-  saveOptions: { path: './.sandstone/output/datapack' },
+  name: "Illegal Upgradable TNT",
+  description: ["A datapack by ", { text: "Mizab", color: "gold" }],
+  formatVersion: 26,
+  namespace: "illegal_upgradable_tnt",
+  packUid: "zIoSdkjJ",
+  saveOptions: { path: "./.sandstone/output/datapack" },
+  // saveOptions: { world: "Testing 4" },
   onConflict: {
-    default: 'warn',
+    default: "warn",
   },
-} as SandstoneConfig
+  scripts: {
+    afterAll: () => {
+      // @ts-ignore
+      let worldName = this.default.saveOptions.world;
+      addDependencies(worldName);
+    },
+  },
+} as SandstoneConfig;

@@ -20,7 +20,8 @@ jobs:
           npm run build
       - name: Add & Commit changes
         run: |
-          git worktree add gen generated
+          git worktree add generated
+          git worktree add gen
           rm -rf gen/*
           mv ./.sandstone/output/* gen
           cd gen
