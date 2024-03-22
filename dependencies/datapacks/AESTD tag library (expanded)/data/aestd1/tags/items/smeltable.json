@@ -1,0 +1,377 @@
+{
+	"description": "Items that can be cooked into another in a furnace if no smelting recipes are added or removed",
+	"values": [
+		{
+			"id": "minecraft:iron_boots",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_leggings",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_chestplate",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_helmet",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_axe",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_hoe",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_pickaxe",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_shovel",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_boots",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_leggings",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_chestplate",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_helmet",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_axe",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_hoe",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_pickaxe",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_shovel",
+			"required": false
+		},
+		{
+			"id": "minecraft:coal_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:lapis_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:gilded_blackstone",
+			"required": false
+		},
+		{
+			"id": "minecraft:gold_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:redstone_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:emerald_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:diamond_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:nether_quartz_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:beef",
+			"required": false
+		},
+		{
+			"id": "minecraft:chicken",
+			"required": false
+		},
+		{
+			"id": "minecraft:cod",
+			"required": false
+		},
+		{
+			"id": "minecraft:mutton",
+			"required": false
+		},
+		{
+			"id": "minecraft:salmon",
+			"required": false
+		},
+		{
+			"id": "minecraft:porkchop",
+			"required": false
+		},
+		{
+			"id": "minecraft:potato",
+			"required": false
+		},
+		{
+			"id": "minecraft:rabbit",
+			"required": false
+		},
+		{
+			"id": "minecraft:white_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:orange_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:magenta_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:light_blue_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:yellow_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:lime_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:pink_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:gray_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:light_gray_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:cyan_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:purple_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:blue_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:brown_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:green_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:red_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:black_terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:terracotta",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_oak_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_oak_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_birch_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_birch_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_acacia_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_acacia_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_jungle_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_jungle_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_spruce_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_spruce_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_dark_oak_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_dark_oak_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:ancient_debris",
+			"required": false
+		},
+		{
+			"id": "minecraft:cactus",
+			"required": false
+		},
+		{
+			"id": "minecraft:clay",
+			"required": false
+		},
+		{
+			"id": "minecraft:clay_ball",
+			"required": false
+		},
+		{
+			"id": "minecraft:cobblestone",
+			"required": false
+		},
+		{
+			"id": "minecraft:chorus_fruit",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_horse_armor",
+			"required": false
+		},
+		{
+			"id": "minecraft:golden_sword",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_horse_armor",
+			"required": false
+		},
+		{
+			"id": "minecraft:iron_sword",
+			"required": false
+		},
+		{
+			"id": "minecraft:kelp",
+			"required": false
+		},
+		{
+			"id": "minecraft:netherrack",
+			"required": false
+		},
+		{
+			"id": "minecraft:nether_bricks",
+			"required": false
+		},
+		{
+			"id": "minecraft:red_sand",
+			"required": false
+		},
+		{
+			"id": "minecraft:sand",
+			"required": false
+		},
+		{
+			"id": "minecraft:sea_pickle",
+			"required": false
+		},
+		{
+			"id": "minecraft:stone",
+			"required": false
+		},
+		{
+			"id": "minecraft:stone_bricks",
+			"required": false
+		},
+		{
+			"id": "minecraft:wet_sponge",
+			"required": false
+		}
+	]
+}

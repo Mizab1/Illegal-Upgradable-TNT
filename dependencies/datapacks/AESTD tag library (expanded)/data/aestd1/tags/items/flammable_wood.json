@@ -1,0 +1,245 @@
+{
+	"description": "All wood blocks (logs, stripped logs, wood, stripped wood, planks, slabs, fences, fence gates, signs and stairs) built from overworld trees, not to be confused with wood (bark) blocks only",
+	"values": [
+		{
+			"id": "minecraft:acacia_planks",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_planks",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_planks",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_planks",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_planks",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_planks",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_slab",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_slab",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_slab",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_slab",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_slab",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_slab",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_fence_gate",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_fence_gate",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_fence_gate",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_fence_gate",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_fence_gate",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_fence_gate",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_fence",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_fence",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_fence",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_fence",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_fence",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_fence",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_sign",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_sign",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_sign",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_sign",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_sign",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_sign",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_stairs",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_stairs",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_stairs",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_stairs",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_stairs",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_stairs",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_oak_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_oak_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_birch_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_birch_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_acacia_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_acacia_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_spruce_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_spruce_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_jungle_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_jungle_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_wood",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_dark_oak_log",
+			"required": false
+		},
+		{
+			"id": "minecraft:stripped_dark_oak_wood",
+			"required": false
+		}
+	]
+}

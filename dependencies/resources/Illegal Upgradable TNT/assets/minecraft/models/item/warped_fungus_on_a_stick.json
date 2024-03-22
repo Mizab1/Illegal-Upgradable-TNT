@@ -1,0 +1,12 @@
+{
+    "parent": "item/handheld_rod",
+    "textures": {
+        "layer0": "item/warped_fungus_on_a_stick"
+    },
+        "overrides": [
+          { "predicate": {"custom_model_data":111100}, "model": "gravity_guns/gravity_gun"},
+          { "predicate": {"custom_model_data":111101}, "model": "gravity_guns/sc_gravity_gun"},
+          { "predicate": {"custom_model_data":111102}, "model": "gravity_guns/cc_gravity_gun"},
+          { "predicate": {"custom_model_data":111103}, "model": "gravity_guns/mob_gravity_gun"}
+        ]
+}

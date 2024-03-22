@@ -1,0 +1,25 @@
+{
+	"description": "Blocks with no visible model",
+	"values": [
+		{
+			"id": "minecraft:barrier",
+			"required": false
+		},
+		{
+			"id": "minecraft:structure_void",
+			"required": false
+		},
+		{
+			"id": "minecraft:air",
+			"required": false
+		},
+		{
+			"id": "minecraft:cave_air",
+			"required": false
+		},
+		{
+			"id": "minecraft:void_air",
+			"required": false
+		}
+	]
+}

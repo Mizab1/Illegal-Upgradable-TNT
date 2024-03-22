@@ -1,0 +1,321 @@
+{
+	"description": "Blocks which can drop different items depending on the silk touch enchantment if no block loot table is changed",
+	"values": [
+		{
+			"id": "minecraft:white_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:orange_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:magenta_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:light_blue_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:yellow_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:lime_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:pink_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:gray_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:light_gray_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:cyan_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:purple_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:blue_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:brown_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:green_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:red_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:black_stained_glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:glass",
+			"required": false
+		},
+		{
+			"id": "minecraft:white_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:orange_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:magenta_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:light_blue_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:yellow_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:lime_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:pink_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:gray_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:light_gray_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:cyan_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:purple_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:blue_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:brown_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:green_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:red_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:black_stained_glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:glass_pane",
+			"required": false
+		},
+		{
+			"id": "minecraft:red_mushroom_block",
+			"required": false
+		},
+		{
+			"id": "minecraft:brown_mushroom_block",
+			"required": false
+		},
+		{
+			"id": "minecraft:mushroom_stem",
+			"required": false
+		},
+		{
+			"id": "minecraft:tube_coral_fan",
+			"required": false
+		},
+		{
+			"id": "minecraft:brain_coral_fan",
+			"required": false
+		},
+		{
+			"id": "minecraft:bubble_coral_fan",
+			"required": false
+		},
+		{
+			"id": "minecraft:fire_coral_fan",
+			"required": false
+		},
+		{
+			"id": "minecraft:horn_coral_fan",
+			"required": false
+		},
+		{
+			"id": "minecraft:tube_coral",
+			"required": false
+		},
+		{
+			"id": "minecraft:brain_coral",
+			"required": false
+		},
+		{
+			"id": "minecraft:bubble_coral",
+			"required": false
+		},
+		{
+			"id": "minecraft:fire_coral",
+			"required": false
+		},
+		{
+			"id": "minecraft:horn_coral",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_leaves",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_leaves",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_leaves",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_leaves",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_leaves",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_leaves",
+			"required": false
+		},
+		{
+			"id": "minecraft:bee_nest",
+			"required": false
+		},
+		{
+			"id": "minecraft:blue_ice",
+			"required": false
+		},
+		{
+			"id": "minecraft:bookshelf",
+			"required": false
+		},
+		{
+			"id": "minecraft:clay",
+			"required": false
+		},
+		{
+			"id": "minecraft:coal_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:diamond_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:emerald_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:ender_chest",
+			"required": false
+		},
+		{
+			"id": "minecraft:gilded_blackstone",
+			"required": false
+		},
+		{
+			"id": "minecraft:glowstone",
+			"required": false
+		},
+		{
+			"id": "minecraft:grass_block",
+			"required": false
+		},
+		{
+			"id": "minecraft:gravel",
+			"required": false
+		},
+		{
+			"id": "minecraft:ice",
+			"required": false
+		},
+		{
+			"id": "minecraft:lapis_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:melon",
+			"required": false
+		},
+		{
+			"id": "minecraft:mycelium",
+			"required": false
+		},
+		{
+			"id": "minecraft:nether_gold_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:nether_quartz_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:packed_ice",
+			"required": false
+		},
+		{
+			"id": "minecraft:podzol",
+			"required": false
+		},
+		{
+			"id": "minecraft:redstone_ore",
+			"required": false
+		},
+		{
+			"id": "minecraft:sea_lantern",
+			"required": false
+		},
+		{
+			"id": "minecraft:snow",
+			"required": false
+		},
+		{
+			"id": "minecraft:snow_block",
+			"required": false
+		},
+		{
+			"id": "minecraft:stone",
+			"required": false
+		},
+		{
+			"id": "minecraft:turtle_egg",
+			"required": false
+		}
+	]
+}

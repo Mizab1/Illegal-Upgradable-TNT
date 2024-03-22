@@ -1,0 +1,117 @@
+{
+	"description": "Blocks that take two tiles of space when placed, not including banners whose hitbox is contained in a single box and which comprise of a single block",
+	"values": [
+		{
+			"id": "minecraft:white_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:orange_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:magenta_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:light_blue_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:yellow_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:lime_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:pink_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:gray_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:light_gray_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:cyan_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:purple_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:blue_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:brown_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:green_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:red_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:black_bed",
+			"required": false
+		},
+		{
+			"id": "minecraft:sunflower",
+			"required": false
+		},
+		{
+			"id": "minecraft:lilac",
+			"required": false
+		},
+		{
+			"id": "minecraft:peony",
+			"required": false
+		},
+		{
+			"id": "minecraft:rose_bush",
+			"required": false
+		},
+		{
+			"id": "minecraft:oak_door",
+			"required": false
+		},
+		{
+			"id": "minecraft:birch_door",
+			"required": false
+		},
+		{
+			"id": "minecraft:acacia_door",
+			"required": false
+		},
+		{
+			"id": "minecraft:spruce_door",
+			"required": false
+		},
+		{
+			"id": "minecraft:jungle_door",
+			"required": false
+		},
+		{
+			"id": "minecraft:dark_oak_door",
+			"required": false
+		},
+		{
+			"id": "minecraft:large_fern",
+			"required": false
+		},
+		{
+			"id": "minecraft:tall_grass",
+			"required": false
+		}
+	]
+}
