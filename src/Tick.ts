@@ -1,11 +1,9 @@
 import { MCFunction, Objective, Selector } from "sandstone";
-import { AddGravity } from "./CustomTnt/Auxillary/AddGravityToTnt";
-import { spawnSlime, teleportSlime } from "./CustomTnt/DisableSlots";
-import { decrementFuseTime } from "./CustomTnt/Fuse";
-import { handler, setTntblock } from "./CustomTnt/Tick";
-import { Fireball } from "./Objects/Fireball";
+import { AddGravity } from "./CustomTnt/private/AddGravityToTnt";
 import { AddDarkness } from "./CustomTnt/Auxillary/GhostTnt/AddDarkness";
-import { hitGround } from "./Items/Dynamite";
+import { handler, setTntblock } from "./CustomTnt/Tick";
+import { decrementFuseTime } from "./CustomTnt/private/Fuse";
+import { Fireball } from "./Objects/Fireball";
 
 const fuseTimeObj = Objective.create("fuse_time_obj", "dummy");
 const rngObj = Objective.create("rng_obj", "dummy");
@@ -21,17 +19,17 @@ const tick = MCFunction(
     // TNT related
     setTntblock();
     handler();
+    decrementFuseTime();
+    AddGravity();
 
     // Dynamite
-    hitGround();
+    // hitGround();
 
     // Disable slots of the Armor stand disguised as Custom TNT
-    teleportSlime();
-    spawnSlime();
-    decrementFuseTime();
+    // teleportSlime();
+    // spawnSlime();
 
     // Aux TNT functions
-    AddGravity();
     AddDarkness();
 
     // Fireball

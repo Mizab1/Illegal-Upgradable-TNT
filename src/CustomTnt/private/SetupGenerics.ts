@@ -1,4 +1,5 @@
 import {
+  ENTITY_TYPES,
   MCFunction,
   NBT,
   Selector,
@@ -18,6 +19,9 @@ import { CombinedConditions } from "sandstone/flow/conditions";
 import { fuseTime, self } from "../../Tick";
 import { i } from "../../Utils/Functions";
 
+// @ts-ignore
+export const TNT_PARENT_ENTITY: ENTITY_TYPES = "minecraft:armor_stand";
+
 /**
  * Places TNT at the specified location if the endermite has a certain tag.
  *
@@ -31,18 +35,34 @@ const placeTnt = (tag: string, customModelData: number) => {
       NoGravity: NBT.byte(1),
       Invisible: NBT.byte(1),
       Tags: [`tnt.${tag}`, `tnt.as`],
-      ArmorItems: [
-        {},
-        {},
-        {},
+      // ArmorItems: [
+      //   {},
+      //   {},
+      //   {},
+      //   {
+      //     id: "minecraft:endermite_spawn_egg",
+      //     Count: NBT.byte(1),
+      //     tag: { CustomModelData: customModelData },
+      //   },
+      // ],
+      DisabledSlots: 63,
+      Small: NBT.byte(1),
+      Passengers: [
         {
-          id: "minecraft:endermite_spawn_egg",
-          Count: NBT.byte(1),
-          tag: { CustomModelData: customModelData },
+          id: "minecraft:item_display",
+          item_display: "head",
+          Tags: ["tnt.as"],
+          brightness: { sky: 10, block: 0 },
+          item: { id: "minecraft:endermite_spawn_egg", Count: NBT.byte(1), tag: { CustomModelData: customModelData } },
         },
       ],
-      DisabledSlots: 63,
     });
+    // summon("item_display", rel(0, 0, 0), {
+    //   Tags: [`tnt.${tag}`, `tnt.as`],
+    //   item_display: "head",
+    //   item: { id: "minecraft:endermite_spawn_egg", Count: NBT.byte(1), tag: { CustomModelData: customModelData } },
+    //   brightness: { sky: 10, block: 0 },
+    // });
     setblock(rel(0, 0, 0), "minecraft:tnt");
     tp(self, rel(0, -600, 0));
   });
@@ -56,12 +76,7 @@ const placeTnt = (tag: string, customModelData: number) => {
  * @param {string} tag - The tag associated with the TNT item.
  * @param {number} customModelData - The custom model data for the TNT item.
  */
-const createGiveFunction = (
-  nameOfTheGiveFunction: string,
-  nameOfTheTnt: string,
-  tag: string,
-  customModelData: number
-) => {
+const createGiveFunction = (nameOfTheGiveFunction: string, nameOfTheTnt: string, tag: string, customModelData: number) => {
   MCFunction("give_tnt/" + nameOfTheGiveFunction, () => {
     give(
       self,
@@ -85,11 +100,6 @@ const createGiveFunction = (
         },
       })
     );
-    // give(
-    //   self,
-    //   "minecraft:endermite_spawn_egg" +
-    //     `{display:{Name:'{"text":"${nameOfTheTnt}","color":"#FF0808","italic":false}'},CustomModelData: ${customModelData},EntityTag:{Silent:1b,NoAI:1b, Tags:["${tag}","tnt.endermite"],ActiveEffects:[{Id:14b,Amplifier:1b,Duration: 999999,ShowParticles: 0b}]}}`
-    // );
   });
 };
 
@@ -112,6 +122,10 @@ const primingCondition: CombinedConditions = _.or(
   }),
   Selector("@s", { tag: "picked_up" })
 );
+
+const killItemDisplay = () => {
+  execute.positioned(rel(0, 1, 0)).run.kill(Selector("@e", { type: "item_display", distance: [Infinity, 0.5] }));
+};
 
 /**
  * Handles the explosion event for the given TNT tag.
@@ -158,23 +172,12 @@ export const explosionHandler = (
       runEachTick ? runEachTick() : "";
 
       _.if(fuseTime.matches(0), () => {
-        particle(
-          "minecraft:explosion",
-          rel(0, 1, 0),
-          [1, 1, 1],
-          1,
-          30,
-          "force"
-        );
+        particle("minecraft:explosion", rel(0, 1, 0), [1, 1, 1], 1, 30, "force");
         particle("minecraft:cloud", rel(0, 1, 0), [1, 0.1, 1], 1, 20, "force");
-        playsound(
-          "minecraft:entity.generic.explode",
-          "master",
-          "@a",
-          rel(0, 1, 0)
-        );
+        playsound("minecraft:entity.generic.explode", "master", "@a", rel(0, 1, 0));
         eventOnExplosion();
         kill(self);
+        killItemDisplay();
       });
     });
 
@@ -184,6 +187,7 @@ export const explosionHandler = (
       .unless(Selector("@s", { tag: "is_primed" }))
       .run(() => {
         kill(self);
+        killItemDisplay();
       });
   });
 };

@@ -8,7 +8,7 @@ export default {
   namespace: "illegal_upgradable_tnt",
   packUid: "zIoSdkjJ",
   // saveOptions: { path: "./.sandstone/output/datapack"},
-  saveOptions: { world: "Testing 4" },
+  saveOptions: { world: "Comission Mod Test World" },
   onConflict: {
     default: "warn",
   },

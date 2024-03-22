@@ -1,14 +1,6 @@
-import {
-  MCFunction,
-  NBT,
-  Selector,
-  _,
-  execute,
-  rel,
-  summon,
-  tp,
-} from "sandstone";
-import { self } from "../Tick";
+import { MCFunction, NBT, Selector, _, execute, rel, summon, tp } from "sandstone";
+import { self } from "../../Tick";
+import { TNT_PARENT_ENTITY } from "./SetupGenerics";
 
 /**
  * Creates a slime entity with special attributes and effects.
@@ -33,9 +25,7 @@ export const slimeEntity = () => {
 // Summon a slime at the position of TNT's armor stand to disable the slots of the armor stand so that player can't interact with it
 export const spawnSlime = MCFunction("custom_tnt/spawn_slime", () => {
   execute
-    .at(
-      Selector("@e", { type: "armor_stand", tag: ["tnt.as", "gravity_base"] })
-    )
+    .at(Selector("@e", { type: TNT_PARENT_ENTITY, tag: ["tnt.as", "gravity_base"] }))
     .unless(
       Selector("@e", {
         type: "minecraft:slime",
@@ -56,7 +46,7 @@ export const teleportSlime = MCFunction("custom_tnt/teleport_slime", () => {
     .run(() => {
       _.if(
         Selector("@e", {
-          type: "minecraft:armor_stand",
+          type: TNT_PARENT_ENTITY,
           tag: ["tnt.as", "gravity_base"],
           distance: [Infinity, 1],
         }),
@@ -64,7 +54,7 @@ export const teleportSlime = MCFunction("custom_tnt/teleport_slime", () => {
           execute
             .at(
               Selector("@e", {
-                type: "minecraft:armor_stand",
+                type: TNT_PARENT_ENTITY,
                 tag: ["tnt.as", "gravity_base"],
                 distance: [Infinity, 1],
               })
