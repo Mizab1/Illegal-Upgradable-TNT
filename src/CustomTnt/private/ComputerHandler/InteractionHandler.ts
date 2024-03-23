@@ -52,7 +52,8 @@ export const upgradeTNTGenerics = (currentTNTTag: string, nextTNTTag: string, ne
           tag(self).remove(currentTNTTag);
           Data("entity", self).select("Passengers[0].item.tag.CustomModelData").set(nextCustomModelData);
 
-          // Kill the laptop and text
+          // Kill the laptop and text and remove the running tag
+          tag(self).remove("running");
           execute.positioned(rel(0, 1, 0)).run(() => {
             kill(Selector("@e", { type: "minecraft:interaction", tag: "tnt.laptop.interaction", distance: [Infinity, 0.5] }));
             kill(Selector("@e", { type: "minecraft:item_display", tag: "tnt.laptop.display", distance: [Infinity, 0.5] }));
