@@ -1,8 +1,7 @@
 import { MCFunction, Objective, Selector } from "sandstone";
-import { AddGravity } from "./CustomTnt/private/AddGravityToTnt";
-import { AddDarkness } from "./CustomTnt/Auxillary/GhostTnt/AddDarkness";
+import { AddGravity } from "./CustomTnt/Private/AddGravityToTnt";
 import { handler, setTntblock } from "./CustomTnt/Tick";
-import { decrementFuseTime } from "./CustomTnt/private/Fuse";
+import { decrementFuseTime } from "./CustomTnt/Private/Fuse";
 import { Fireball } from "./Objects/Fireball";
 
 const fuseTimeObj = Objective.create("fuse_time_obj", "dummy");
@@ -30,7 +29,6 @@ const tick = MCFunction(
     // spawnSlime();
 
     // Aux TNT functions
-    AddDarkness();
 
     // Fireball
     Fireball();

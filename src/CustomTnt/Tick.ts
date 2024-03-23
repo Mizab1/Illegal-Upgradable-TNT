@@ -1,6 +1,6 @@
 import { MCFunction, NBT, Selector, execute, particle, rel, summon } from "sandstone";
 import { self } from "../Tick";
-import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./private/SetupGenerics";
+import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./Private/SetupGenerics";
 
 export const setTntblock = MCFunction("custom_tnt/setblock", () => {
   execute
