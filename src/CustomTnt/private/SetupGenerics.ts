@@ -10,6 +10,7 @@ import {
   particle,
   playsound,
   rel,
+  say,
   setblock,
   summon,
   tag,
@@ -29,8 +30,11 @@ export const TNT_PARENT_ENTITY: ENTITY_TYPES = "minecraft:armor_stand";
  * @param {number} customModelData - The custom model data for the TNT item.
  */
 const placeTnt = (tag: Array<string>, customModelData: number) => {
+  //* Run by the endermite
+
   const tagWithPrefix = tag.map((item) => `tnt.${item}`);
-  _.if(Selector("@s", { tag: tag }), () => {
+  _.if(Selector("@s", { tag: tag[0] }), () => {
+    say("Placing TNT");
     playsound("minecraft:block.grass.place", "block", "@a", rel(0, 0, 0));
     summon("minecraft:armor_stand", rel(0, 0, 0), {
       NoGravity: NBT.byte(1),
@@ -63,7 +67,6 @@ const placeTnt = (tag: Array<string>, customModelData: number) => {
  */
 const createGiveFunction = (nameOfTheGiveFunction: string, nameOfTheTnt: string, tag: Array<string>, customModelData: number) => {
   MCFunction("give_tnt/" + nameOfTheGiveFunction, () => {
-    const tagWithPrefix = tag.map((item) => `tnt.${item}`);
     give(
       self,
       i("minecraft:endermite_spawn_egg", {
@@ -74,7 +77,7 @@ const createGiveFunction = (nameOfTheGiveFunction: string, nameOfTheTnt: string,
         EntityTag: {
           Silent: NBT.byte(1),
           NoAI: NBT.byte(1),
-          Tags: [...tagWithPrefix, "tnt.endermite"],
+          Tags: [...tag, "tnt.endermite"],
           ActiveEffects: [
             {
               Id: NBT.byte(14),
