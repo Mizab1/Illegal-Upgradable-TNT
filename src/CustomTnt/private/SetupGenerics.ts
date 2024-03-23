@@ -34,7 +34,6 @@ const placeTnt = (tag: Array<string>, customModelData: number) => {
 
   const tagWithPrefix = tag.map((item) => `tnt.${item}`);
   _.if(Selector("@s", { tag: tag[0] }), () => {
-    say("Placing TNT");
     playsound("minecraft:block.grass.place", "block", "@a", rel(0, 0, 0));
     summon("minecraft:armor_stand", rel(0, 0, 0), {
       NoGravity: NBT.byte(1),
