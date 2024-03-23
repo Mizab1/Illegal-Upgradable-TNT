@@ -36,16 +36,6 @@ const placeTnt = (tag: Array<string>, customModelData: number) => {
       NoGravity: NBT.byte(1),
       Invisible: NBT.byte(1),
       Tags: [...tagWithPrefix, `tnt.as`],
-      // ArmorItems: [
-      //   {},
-      //   {},
-      //   {},
-      //   {
-      //     id: "minecraft:endermite_spawn_egg",
-      //     Count: NBT.byte(1),
-      //     tag: { CustomModelData: customModelData },
-      //   },
-      // ],
       DisabledSlots: 63,
       Small: NBT.byte(1),
       Passengers: [
@@ -58,12 +48,6 @@ const placeTnt = (tag: Array<string>, customModelData: number) => {
         },
       ],
     });
-    // summon("item_display", rel(0, 0, 0), {
-    //   Tags: [`tnt.${tag}`, `tnt.as`],
-    //   item_display: "head",
-    //   item: { id: "minecraft:endermite_spawn_egg", Count: NBT.byte(1), tag: { CustomModelData: customModelData } },
-    //   brightness: { sky: 10, block: 0 },
-    // });
     setblock(rel(0, 0, 0), "minecraft:tnt");
     tp(self, rel(0, -600, 0));
   });
