@@ -3,6 +3,8 @@ import { AddGravity } from "./CustomTnt/Private/AddGravityToTnt";
 import { handler, setTntblock } from "./CustomTnt/Tick";
 import { decrementFuseTime } from "./CustomTnt/Private/Fuse";
 import { Fireball } from "./Objects/Fireball";
+import { placementHandler } from "./CustomTnt/Private/ComputerHandler/PlacementHandler";
+import { interactionHandler } from "./CustomTnt/Private/ComputerHandler/InteractionHandler";
 
 const fuseTimeObj = Objective.create("fuse_time_obj", "dummy");
 const rngObj = Objective.create("rng_obj", "dummy");
@@ -20,6 +22,10 @@ const tick = MCFunction(
     handler();
     decrementFuseTime();
     AddGravity();
+
+    // Computer Related
+    placementHandler();
+    interactionHandler();
 
     // Dynamite
     // hitGround();

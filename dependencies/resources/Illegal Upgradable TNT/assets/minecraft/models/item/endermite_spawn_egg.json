@@ -6,6 +6,7 @@
     },
 	
     "overrides":[
+        {"predicate": {"custom_model_data":100001}, "model":"item/custom_items/laptop"},
         {"predicate": {"custom_model_data":110001}, "model":"item/tnt/5x_tnt"},
         {"predicate": {"custom_model_data":110002}, "model":"item/tnt/10x_tnt"},
         {"predicate": {"custom_model_data":110003}, "model":"item/tnt/20x_tnt"},
