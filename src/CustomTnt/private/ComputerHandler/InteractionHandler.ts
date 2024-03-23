@@ -49,8 +49,12 @@ export const upgradeTNTGenerics = (currentTNTTag: string, nextTNTTag: string, ne
         // End sequence
         _.if(scheduleTimer.matches(0), () => {
           tag(self).add(`tnt.${nextTNTTag}`);
-          tag(self).remove(currentTNTTag);
-          Data("entity", self).select("Passengers[0].item.tag.CustomModelData").set(nextCustomModelData);
+          execute.positioned(rel(0, 1, 0)).run(() => {
+            Data("entity", Selector("@e", { type: "minecraft:item_display", limit: 1, distance: [Infinity, 0.5] }))
+              .select("item.tag.CustomModelData")
+              .set(nextCustomModelData);
+          });
+          say(nextCustomModelData);
 
           // Kill the laptop and text and remove the running tag
           tag(self).remove("running");
@@ -61,6 +65,7 @@ export const upgradeTNTGenerics = (currentTNTTag: string, nextTNTTag: string, ne
           execute.positioned(rel(0, 2, 0)).run(() => {
             kill(Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5] }));
           });
+          tag(self).remove(`tnt.${currentTNTTag}`);
         });
       });
     });

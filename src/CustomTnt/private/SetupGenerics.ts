@@ -45,7 +45,7 @@ const placeTnt = (tag: Array<string>, customModelData: number) => {
         {
           id: "minecraft:item_display",
           item_display: "head",
-          Tags: ["tnt.as"],
+          Tags: ["tnt.as", "tnt.item_display"],
           brightness: { sky: 10, block: 0 },
           item: { id: "minecraft:endermite_spawn_egg", Count: NBT.byte(1), tag: { CustomModelData: customModelData } },
         },
