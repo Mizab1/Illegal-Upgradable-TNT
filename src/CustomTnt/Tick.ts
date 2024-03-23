@@ -1,4 +1,4 @@
-import { MCFunction, NBT, Selector, execute, particle, rel, summon } from "sandstone";
+import { MCFunction, NBT, Selector, execute, particle, rel, say, summon } from "sandstone";
 import { self } from "../Tick";
 import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./Private/SetupGenerics";
 
@@ -8,7 +8,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
     .at(self)
     .run(() => {
       // Creates the "Give TNT" function and does the processing if Custom TNT is placed
-      placeAndCreateFunction("give_5x", "5x TNT", "5x", 110001);
+      placeAndCreateFunction("give_5x", "5x TNT", ["5x", "5x.stable"], 110001);
     });
 });
 
