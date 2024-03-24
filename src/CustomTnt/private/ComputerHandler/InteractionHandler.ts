@@ -132,14 +132,17 @@ export const upgradeTNTGenerics = (
           });
 
           // Upgrade the TNT
-          tag(self).add(`tnt.${nextTNTTag}`);
           execute.positioned(rel(0, 1, 0)).run(() => {
-            Data("entity", Selector("@e", { type: "minecraft:item_display", limit: 1, distance: [Infinity, 0.5] }))
+            Data(
+              "entity",
+              Selector("@e", { type: "minecraft:item_display", tag: "tnt.item_display", limit: 1, distance: [Infinity, 0.5] })
+            )
               .select("item.tag.CustomModelData")
               .set(nextCustomModelData);
           });
-          tag(self).remove("running");
           tag(self).remove(`tnt.${currentTNTTag}`);
+          tag(self).add(`tnt.${nextTNTTag}`);
+          tag(self).remove("running");
         });
       });
     });

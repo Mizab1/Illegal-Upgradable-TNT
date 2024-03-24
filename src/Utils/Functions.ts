@@ -1,4 +1,4 @@
-import { BLOCKS, ITEMS, LiteralUnion, RootNBT, nbtParser } from "sandstone";
+import { BLOCKS, ITEMS, LiteralUnion, RootNBT, execute, nbtParser, rel, setblock } from "sandstone";
 
 /**
  * Concatenates the given item with the parsed nbt string.
@@ -44,19 +44,12 @@ export function randomFloatFromInterval(min: number, max: number): number {
  * @param {number[]} exclude - An array of values to exclude from the range.
  * @returns {number | null} - A random number within the range, excluding the specified values. Returns null if all values are excluded.
  */
-export function getRandomNumberInRange(
-  min: number,
-  max: number,
-  exclude: number[]
-): number | null {
+export function getRandomNumberInRange(min: number, max: number, exclude: number[]): number | null {
   if (max <= min) {
     throw new Error("Invalid range. 'max' should be greater than 'min'.");
   }
 
-  const range = Array.from(
-    { length: max - min + 1 },
-    (_, index) => min + index
-  );
+  const range = Array.from({ length: max - min + 1 }, (_, index) => min + index);
 
   // Filter out excluded values
   const availableValues = range.filter((value) => !exclude.includes(value));
@@ -68,4 +61,24 @@ export function getRandomNumberInRange(
 
   const randomIndex = Math.floor(Math.random() * availableValues.length);
   return availableValues[randomIndex];
+}
+
+export function forReplaceEachBlock(
+  from: [x: number, y: number, z: number],
+  to: [x: number, y: number, z: number],
+  blockToExclude: LiteralUnion<BLOCKS>,
+  blockToPlace: LiteralUnion<BLOCKS>
+) {
+  for (let i = from[0]; i < to[0]; i++) {
+    for (let j = from[1]; j < to[1]; j++) {
+      for (let k = from[2]; k < to[2]; k++) {
+        execute
+          .positioned(rel(i, j, k))
+          .if.block(rel(0, 0, 0), blockToExclude)
+          .run(() => {
+            setblock(rel(0, 0, 0), blockToPlace);
+          });
+      }
+    }
+  }
 }
