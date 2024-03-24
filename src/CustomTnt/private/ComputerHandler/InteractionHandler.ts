@@ -11,6 +11,7 @@ import {
   particle,
   playsound,
   rel,
+  stopsound,
   summon,
   tag,
 } from "sandstone";
@@ -26,6 +27,12 @@ export const interactionHandler = () => {
       // Check if the laptop is interacted
       execute.if.data.entity(self, "interaction").run(() => {
         upgradeTNT();
+      });
+
+      // Check if the laptop is broken
+      execute.if.data.entity(self, "attack").run(() => {
+        kill(Selector("@e", { type: "minecraft:item_display", tag: "tnt.laptop.display", distance: [Infinity, 0.5] }));
+        kill(self);
       });
     });
 };
@@ -82,8 +89,8 @@ export const upgradeTNTGenerics = (
 
         // Play sounds
         // /playsound minecraft:block.amethyst_block.resonate master @a ~ ~ ~ 1 2
-        _.if(scheduleTimer.moduloBy(3).matches(0), () => {
-          playsound("minecraft:block.amethyst_block.resonate", "master", "@a", rel(0, 0, 0), 1, 2);
+        _.if(scheduleTimer.moduloBy(20).matches(0), () => {
+          playsound("minecraft:sfx.typing", "master", "@a", rel(0, 0, 0), 1, 2);
         });
 
         // Text sequence
@@ -112,13 +119,8 @@ export const upgradeTNTGenerics = (
           // Play sound
           playsound("minecraft:block.note_block.bell", "master", "@a", rel(0, 0, 0), 1, 1);
 
-          // Upgrade the TNT
-          tag(self).add(`tnt.${nextTNTTag}`);
-          execute.positioned(rel(0, 1, 0)).run(() => {
-            Data("entity", Selector("@e", { type: "minecraft:item_display", limit: 1, distance: [Infinity, 0.5] }))
-              .select("item.tag.CustomModelData")
-              .set(nextCustomModelData);
-          });
+          // Stop the sounds
+          stopsound("@a", "master", "minecraft:sfx.typing");
 
           // Kill the laptop and text and remove the running tag
           execute.positioned(rel(0, 1, 0)).run(() => {
@@ -127,6 +129,14 @@ export const upgradeTNTGenerics = (
           });
           execute.positioned(rel(0, 2, 0)).run(() => {
             kill(Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5] }));
+          });
+
+          // Upgrade the TNT
+          tag(self).add(`tnt.${nextTNTTag}`);
+          execute.positioned(rel(0, 1, 0)).run(() => {
+            Data("entity", Selector("@e", { type: "minecraft:item_display", limit: 1, distance: [Infinity, 0.5] }))
+              .select("item.tag.CustomModelData")
+              .set(nextCustomModelData);
           });
           tag(self).remove("running");
           tag(self).remove(`tnt.${currentTNTTag}`);
