@@ -1,6 +1,7 @@
 import {
   BASIC_COLORS,
   Data,
+  JSONTextComponent,
   LiteralUnion,
   NBT,
   Selector,
@@ -27,6 +28,18 @@ export const interactionHandler = () => {
         upgradeTNT();
       });
     });
+};
+
+const setTextToDisplayEntity = (jsonComponent: string) => {
+  //* Run as TNT_PARENT_ENTITY
+  execute.positioned(rel(0, 2, 0)).run(() => {
+    Data(
+      "entity",
+      Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
+    )
+      .select("text")
+      .set(jsonComponent);
+  });
 };
 
 export const upgradeTNTGenerics = (
@@ -75,54 +88,19 @@ export const upgradeTNTGenerics = (
 
         // Text sequence
         _.if(scheduleTimer.matches(140), () => {
-          execute.positioned(rel(0, 2, 0)).run(() => {
-            Data(
-              "entity",
-              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
-            )
-              .select("text")
-              .set('{"text":"Detecting TNT...", "color":"green"}');
-          });
+          setTextToDisplayEntity(`{"text":"Detecting TNT...", "color":"green"}`);
         });
         _.if(scheduleTimer.matches(100), () => {
-          execute.positioned(rel(0, 2, 0)).run(() => {
-            Data(
-              "entity",
-              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
-            )
-              .select("text")
-              .set(`{"text":"${nameOfCurrentTNT}", "color":"${colorOfTheName}"}`);
-          });
+          setTextToDisplayEntity(`{"text":"${nameOfCurrentTNT}", "color":"${colorOfTheName}"}`);
         });
         _.if(scheduleTimer.matches(60), () => {
-          execute.positioned(rel(0, 2, 0)).run(() => {
-            Data(
-              "entity",
-              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
-            )
-              .select("text")
-              .set(`{"text":"Bypassing Security...", "color":"green"}`);
-          });
+          setTextToDisplayEntity(`{"text":"Bypassing Security...", "color":"green"}`);
         });
         _.if(scheduleTimer.matches(40), () => {
-          execute.positioned(rel(0, 2, 0)).run(() => {
-            Data(
-              "entity",
-              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
-            )
-              .select("text")
-              .set(`{"text":"Mizab is awesome!","color":"green","obfuscated":true, "bold":true}`);
-          });
+          setTextToDisplayEntity(`{"text":"Mizab is awesome!","color":"green","obfuscated":true, "bold":true}`);
         });
         _.if(scheduleTimer.matches(15), () => {
-          execute.positioned(rel(0, 2, 0)).run(() => {
-            Data(
-              "entity",
-              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
-            )
-              .select("text")
-              .set(`{"text":"Done!","color":"green"}`);
-          });
+          setTextToDisplayEntity(`{"text":"Done!","color":"green"}`);
         });
 
         // End sequence
