@@ -1,0 +1,15 @@
+{
+  "sfx.typing": {
+    "sounds": [
+      {
+        "name": "sfx/typing",
+        "volume": 1,
+        "pitch": 1,
+        "weight": 1,
+        "stream": false,
+        "attenuation_distance": 16,
+        "preload": false
+      }
+    ]
+  }
+}
