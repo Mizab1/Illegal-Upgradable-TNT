@@ -1,8 +1,22 @@
-import { Data, NBT, Selector, _, execute, kill, rel, say, summon, tag } from "sandstone";
+import {
+  BASIC_COLORS,
+  Data,
+  LiteralUnion,
+  NBT,
+  Selector,
+  _,
+  execute,
+  kill,
+  particle,
+  playsound,
+  rel,
+  summon,
+  tag,
+} from "sandstone";
 import { self } from "../../../Tick";
 import { upgradeTNT } from "../../Upgrade";
-import { scheduleTimer } from "./ScheduleTimer";
 import { TNT_PARENT_ENTITY } from "../SetupGenerics";
+import { scheduleTimer } from "./ScheduleTimer";
 export const interactionHandler = () => {
   execute
     .as(Selector("@e", { type: "minecraft:interaction", tag: "tnt.laptop.interaction" }))
@@ -15,7 +29,13 @@ export const interactionHandler = () => {
     });
 };
 
-export const upgradeTNTGenerics = (currentTNTTag: string, nextTNTTag: string, nextCustomModelData: number): void => {
+export const upgradeTNTGenerics = (
+  currentTNTTag: string,
+  nextTNTTag: string,
+  nextCustomModelData: number,
+  nameOfCurrentTNT: string,
+  colorOfTheName: LiteralUnion<BASIC_COLORS>
+): void => {
   //* Called with the context of interaction entity with positional context
 
   // Set the schedule timer
@@ -28,8 +48,9 @@ export const upgradeTNTGenerics = (currentTNTTag: string, nextTNTTag: string, ne
 
       // Check the current tag
       execute.if.entity(Selector("@s", { tag: `tnt.${currentTNTTag}` })).run(() => {
-        const maxDelay = 40;
+        const maxDelay = 160;
 
+        // Set the timer and add the running tag
         _.if(Selector("@s", { tag: "!running" }), () => {
           scheduleTimer.set(maxDelay);
           tag(self).add("running");
@@ -42,22 +63,86 @@ export const upgradeTNTGenerics = (currentTNTTag: string, nextTNTTag: string, ne
             billboard: "vertical",
             shadow: NBT.byte(1),
             Tags: ["tnt.laptop.text"],
-            text: '{"text":"Initializing..."}',
+            text: '{"text":"Initializing...", "color":"green"}',
+          });
+        });
+
+        // Play sounds
+        // /playsound minecraft:block.amethyst_block.resonate master @a ~ ~ ~ 1 2
+        _.if(scheduleTimer.moduloBy(3).matches(0), () => {
+          playsound("minecraft:block.amethyst_block.resonate", "master", "@a", rel(0, 0, 0), 1, 2);
+        });
+
+        // Text sequence
+        _.if(scheduleTimer.matches(140), () => {
+          execute.positioned(rel(0, 2, 0)).run(() => {
+            Data(
+              "entity",
+              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
+            )
+              .select("text")
+              .set('{"text":"Detecting TNT...", "color":"green"}');
+          });
+        });
+        _.if(scheduleTimer.matches(100), () => {
+          execute.positioned(rel(0, 2, 0)).run(() => {
+            Data(
+              "entity",
+              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
+            )
+              .select("text")
+              .set(`{"text":"${nameOfCurrentTNT}", "color":"${colorOfTheName}"}`);
+          });
+        });
+        _.if(scheduleTimer.matches(60), () => {
+          execute.positioned(rel(0, 2, 0)).run(() => {
+            Data(
+              "entity",
+              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
+            )
+              .select("text")
+              .set(`{"text":"Bypassing Security...", "color":"green"}`);
+          });
+        });
+        _.if(scheduleTimer.matches(40), () => {
+          execute.positioned(rel(0, 2, 0)).run(() => {
+            Data(
+              "entity",
+              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
+            )
+              .select("text")
+              .set(`{"text":"Mizab is awesome!","color":"green","obfuscated":true, "bold":true}`);
+          });
+        });
+        _.if(scheduleTimer.matches(15), () => {
+          execute.positioned(rel(0, 2, 0)).run(() => {
+            Data(
+              "entity",
+              Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5], limit: 1 })
+            )
+              .select("text")
+              .set(`{"text":"Done!","color":"green"}`);
           });
         });
 
         // End sequence
         _.if(scheduleTimer.matches(0), () => {
+          // Particles and stuff
+          particle("minecraft:poof", rel(0, 1, 0), [0.2, 0.2, 0.2], 0.2, 50, "force");
+          particle("minecraft:falling_dust", "minecraft:lime_concrete", rel(0, 1, 0), [0.5, 0.5, 0.5], 0.8, 200);
+
+          // Play sound
+          playsound("minecraft:block.note_block.bell", "master", "@a", rel(0, 0, 0), 1, 1);
+
+          // Upgrade the TNT
           tag(self).add(`tnt.${nextTNTTag}`);
           execute.positioned(rel(0, 1, 0)).run(() => {
             Data("entity", Selector("@e", { type: "minecraft:item_display", limit: 1, distance: [Infinity, 0.5] }))
               .select("item.tag.CustomModelData")
               .set(nextCustomModelData);
           });
-          say(nextCustomModelData);
 
           // Kill the laptop and text and remove the running tag
-          tag(self).remove("running");
           execute.positioned(rel(0, 1, 0)).run(() => {
             kill(Selector("@e", { type: "minecraft:interaction", tag: "tnt.laptop.interaction", distance: [Infinity, 0.5] }));
             kill(Selector("@e", { type: "minecraft:item_display", tag: "tnt.laptop.display", distance: [Infinity, 0.5] }));
@@ -65,6 +150,7 @@ export const upgradeTNTGenerics = (currentTNTTag: string, nextTNTTag: string, ne
           execute.positioned(rel(0, 2, 0)).run(() => {
             kill(Selector("@e", { type: "minecraft:text_display", tag: "tnt.laptop.text", distance: [Infinity, 0.5] }));
           });
+          tag(self).remove("running");
           tag(self).remove(`tnt.${currentTNTTag}`);
         });
       });
