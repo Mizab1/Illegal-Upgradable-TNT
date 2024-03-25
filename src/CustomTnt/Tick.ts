@@ -64,7 +64,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
                 const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:volcanic_core"]; // ! MOD USED
                 for (let i = -3; i <= 3; i++) {
                   for (let j = -3; j <= 3; j++) {
-                    for (let k = -3; k <= 1; k++) {
+                    for (let k = -3; k <= -1; k++) {
                       execute
                         .positioned(rel(i, k, j))
                         .if.block(rel(0, 0, 0), "#aestd1:all_but_air")
@@ -106,7 +106,9 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               let x = Math.cos(j) * i;
               let z = Math.sin(j) * i;
 
-              setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
+              execute.if
+                .block(rel(0, -1, 0), "#aestd1:all_but_air")
+                .run.setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
             }
           }
 
@@ -151,7 +153,9 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               let x = Math.cos(j) * i * 3;
               let z = Math.sin(j) * i * 3;
 
-              setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
+              execute.if
+                .block(rel(0, -1, 0), "#aestd1:all_but_air")
+                .run.setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
             }
           }
 
@@ -208,7 +212,9 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               let x = Math.cos(j) * i;
               let z = Math.sin(j) * i;
 
-              setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
+              execute.if
+                .block(rel(0, -1, 0), "#aestd1:all_but_air")
+                .run.setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
             }
           }
           for (let i = 1; i <= 20; i++) {
@@ -258,7 +264,9 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               let x = Math.cos(j) * i;
               let z = Math.sin(j) * i;
 
-              setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
+              execute.if
+                .block(rel(0, -1, 0), "#aestd1:all_but_air")
+                .run.setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
             }
           }
           for (let i = 1; i <= 20; i++) {
