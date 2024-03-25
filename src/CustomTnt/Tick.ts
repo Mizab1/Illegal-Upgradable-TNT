@@ -194,6 +194,57 @@ export const handler = MCFunction("custom_tnt/handler", () => {
 
           // Fill Block
           const blocks: Array<string> = [
+            "minecraft:redstone_block",
+            "minecraft:red_concrete",
+            "minecraft:red_terracotta",
+            "minecraft:red_wool",
+            "minecraft:red_mushroom_block",
+            "iceandfire:chared_dirt",
+            "iceandfire:chared_dirt_path",
+            "iceandfire:dragonscale_red",
+          ]; // ! MODS USED
+          for (let i = 1; i <= 20; i++) {
+            for (let j = 1; j <= 180; j++) {
+              let x = Math.cos(j) * i;
+              let z = Math.sin(j) * i;
+
+              setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
+            }
+          }
+          for (let i = 1; i <= 20; i++) {
+            let x = Math.cos(randomIntFromInterval(-5, 5)) * i;
+            let z = Math.sin(randomIntFromInterval(-5, 5)) * i;
+
+            setblock(rel(x, 3, z), "minecraft:smooth_red_sandstone");
+            setblock(rel(x, 2, z), "minecraft:smooth_red_sandstone");
+            setblock(rel(x, 1, z), "minecraft:smooth_red_sandstone");
+            setblock(rel(x, 0, z), "minecraft:smooth_red_sandstone");
+          }
+
+          // Give darkness effect
+          effect.give(Selector("@a", { distance: [Infinity, 20] }), "minecraft:darkness", 10);
+
+          // Summon the bats
+          for (let i = 1; i <= 10; i++) {
+            summon("alexscaves:vesper", rel(randomIntFromInterval(-6, 6), 1, randomIntFromInterval(-6, 6))); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.horror.risky",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "minecraft:red_concrete", rel(0, 0.8, 0), [0.4, 0.4, 0.4], 0.1, 10);
+        },
+        () => {
+          // @ts-ignore
+          particle("minecraft:dust", [1, 0, 0], 3, rel(0, 0.8, 0), [5, 5, 5], 0.1, 1000);
+
+          // Fill Block
+          const blocks: Array<string> = [
             "alexscaves:galena",
             "alexscaves:metal_swarf",
             "alexscaves:packed_galena",
