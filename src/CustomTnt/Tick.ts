@@ -1,6 +1,5 @@
-import { MCFunction, NBT, Selector, execute, fill, kill, particle, rel, say, schedule, summon } from "sandstone";
+import { MCFunction, NBT, Selector, execute, fill, kill, particle, rel, say, schedule, setblock, summon } from "sandstone";
 import { self } from "../Tick";
-import { forReplaceEachBlock } from "../Utils/Functions";
 import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./Private/SetupGenerics";
 
 export const setTntblock = MCFunction("custom_tnt/setblock", () => {
@@ -52,18 +51,18 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               .at(self)
               .run(() => {
                 const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:volcanic_core"];
-                // for (let i = -3; i <= 3; i++) {
-                //   for (let j = -3; j <= 3; j++) {
-                //     for (let k = -3; k <= 1; k++) {
-                //       execute
-                //         .positioned(rel(i, k, j))
-                //         .if.block(rel(0, 0, 0), "#aestd1:all_but_air")
-                //         .run(() => {
-                //           setblock(rel(0, 0, 0), blocks[Math.floor(Math.random() * blocks.length)]);
-                //         });
-                //     }
-                //   }
-                // }
+                for (let i = -3; i <= 3; i++) {
+                  for (let j = -3; j <= 3; j++) {
+                    for (let k = -3; k <= 1; k++) {
+                      execute
+                        .positioned(rel(i, k, j))
+                        .if.block(rel(0, 0, 0), "#aestd1:all_but_air")
+                        .run(() => {
+                          setblock(rel(0, 0, 0), blocks[Math.floor(Math.random() * blocks.length)]);
+                        });
+                    }
+                  }
+                }
                 fill(rel(5, -1, 5), rel(-5, -5, -5), "alexscaves:acid replace #aestd1:air");
                 kill(self);
               });
@@ -73,9 +72,4 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null
       );
     });
-});
-
-MCFunction("test", () => {
-  const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:volcanic_core"];
-  forReplaceEachBlock([-3, -1, -3], [3, -3, 3], "#aestd1:all_but_air", blocks[Math.floor(Math.random() * blocks.length)]);
 });

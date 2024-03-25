@@ -62,23 +62,3 @@ export function getRandomNumberInRange(min: number, max: number, exclude: number
   const randomIndex = Math.floor(Math.random() * availableValues.length);
   return availableValues[randomIndex];
 }
-
-export function forReplaceEachBlock(
-  from: [x: number, y: number, z: number],
-  to: [x: number, y: number, z: number],
-  blockToExclude: LiteralUnion<BLOCKS>,
-  blockToPlace: LiteralUnion<BLOCKS>
-) {
-  for (let i = from[0]; i < to[0]; i++) {
-    for (let j = from[1]; j < to[1]; j++) {
-      for (let k = from[2]; k < to[2]; k++) {
-        execute
-          .positioned(rel(i, j, k))
-          .if.block(rel(0, 0, 0), blockToExclude)
-          .run(() => {
-            setblock(rel(0, 0, 0), blockToPlace);
-          });
-      }
-    }
-  }
-}
