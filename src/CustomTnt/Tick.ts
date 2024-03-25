@@ -1,5 +1,6 @@
-import { MCFunction, NBT, Selector, execute, fill, kill, particle, rel, say, schedule, setblock, summon } from "sandstone";
+import { MCFunction, NBT, Selector, execute, fill, kill, particle, rel, schedule, setblock, summon } from "sandstone";
 import { self } from "../Tick";
+import { randomWithDec } from "../Utils/Functions";
 import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./Private/SetupGenerics";
 
 export const setTntblock = MCFunction("custom_tnt/setblock", () => {
@@ -10,6 +11,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       // Creates the "Give TNT" function and does the processing if Custom TNT is placed
       placeAndCreateFunction("give_acid_tnt_stable", "Acid TNT: Stable", "acid.stable", 110001);
       placeAndCreateFunction("give_acid_tnt_risky", "Acid TNT: Risky", "acid.risky", 120001);
+      placeAndCreateFunction("give_acid_tnt_critical", "Acid TNT: Critical", "acid.critical", 130001);
     });
 });
 
@@ -99,6 +101,72 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
             }
           }
+
+          // Spawn nucleeper
+          for (let i = 1; i <= 4; i++) {
+            summon("alexscaves:nucleeper", rel(0, 0, 0), {
+              // ! MOD USED
+              Motion: [randomWithDec(), 0.8, randomWithDec()],
+            });
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.acid.critical",
+        100,
+        () => {
+          // @ts-ignore
+          particle("alexscaves:amber_explosion", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 1); // ! MOD USED
+          // @ts-ignore
+          particle("alexscaves:acid_bubble", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 2); // ! MOD USED
+          particle("minecraft:flame", rel(0, 0.8, 0), [0.1, 0.5, 0.1], 0.05, 2); // ! MOD USED
+        },
+        () => {
+          // @ts-ignore
+          particle("minecraft:dust", [0, 1, 0], 1, rel(0, 0.8, 0), [2, 2, 2], 0.1, 1000);
+
+          // Summon nuclear bomb and marker
+          summon("alexscaves:nuclear_explosion", rel(0, 0, 0));
+          summon("minecraft:armor_stand", rel(0, 0, 0), {
+            Invisible: NBT.byte(1),
+            Tags: ["tnt.acid_critical.marker"],
+            Marker: NBT.byte(1),
+            NoGravity: NBT.byte(1),
+          });
+
+          // Place a lot of blocks
+          const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:acid"]; // ! MODS USED
+          for (let i = 1; i <= 15; i++) {
+            for (let j = 1; j <= 180; j++) {
+              let x = Math.cos(j) * i * 3;
+              let z = Math.sin(j) * i * 3;
+
+              setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
+            }
+          }
+
+          // Fill the hole and place mobs
+          schedule.function(() => {
+            execute
+              .as(Selector("@e", { type: "armor_stand", tag: "tnt.acid_critical.marker" }))
+              .at(self)
+              .run(() => {
+                // Spawn Mobs
+                for (let i = 1; i <= 4; i++) {
+                  summon("alexscaves:nucleeper", rel(0, 0, 0), {
+                    Motion: [randomWithDec(), 0.8, randomWithDec()],
+                  });
+                }
+                summon("alexscaves:tremorzilla", rel(0, 0, 0), {
+                  Motion: [randomWithDec(), 0.8, randomWithDec()],
+                });
+
+                // Kill marker
+                kill(self);
+              });
+          }, "60t");
         },
         null,
         null
