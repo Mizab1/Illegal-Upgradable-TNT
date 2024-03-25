@@ -222,7 +222,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           }
 
           // Give darkness effect
-          effect.give(Selector("@a", { distance: [Infinity, 20] }), "minecraft:darkness", 10);
+          effect.give(Selector("@a", { distance: [Infinity, 20] }), "minecraft:darkness", 5);
 
           // Summon the bats
           for (let i = 1; i <= 10; i++) {
@@ -238,6 +238,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         () => {
           // @ts-ignore
           particle("minecraft:block", "minecraft:red_concrete", rel(0, 0.8, 0), [0.4, 0.4, 0.4], 0.1, 10);
+          particle("minecraft:falling_dust", "minecraft:red_concrete", rel(0, 0.2, 0), [0.6, 0.2, 0.6], 0.1, 10);
         },
         () => {
           // @ts-ignore
@@ -273,10 +274,14 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           // Give darkness effect
           effect.give(Selector("@a", { distance: [Infinity, 20] }), "minecraft:darkness", 10);
 
-          // Summon the bats
-          for (let i = 1; i <= 10; i++) {
-            summon("alexscaves:vesper", rel(randomIntFromInterval(-6, 6), 1, randomIntFromInterval(-6, 6))); // ! MODS USED
+          // Summon the mobs
+          for (let i = 1; i <= 5; i++) {
+            summon("alexscaves:gloomoth", rel(randomIntFromInterval(-6, 6), 1, randomIntFromInterval(-6, 6))); // ! MODS USED
+            summon("alexscaves:underzealot", rel(randomIntFromInterval(-6, 6), 1, randomIntFromInterval(-6, 6))); // ! MODS USED
+            summon("alexscaves:corrodent", rel(randomIntFromInterval(-6, 6), 1, randomIntFromInterval(-6, 6))); // ! MODS USED
           }
+          for (let i = 0; i < 2; i++)
+            summon("alexscaves:watcher", rel(randomIntFromInterval(-3, 3), 1, randomIntFromInterval(-3, 3)));
         },
         null,
         null
