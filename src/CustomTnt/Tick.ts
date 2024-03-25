@@ -286,5 +286,54 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null,
         null
       );
+      explosionHandler(
+        "tnt.horror.critical",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "minecraft:red_concrete", rel(0, 0.8, 0), [0.4, 0.4, 0.4], 0.1, 10);
+          particle("minecraft:falling_dust", "minecraft:red_concrete", rel(0, 0.2, 0), [0.6, 0.2, 0.6], 0.1, 10);
+          // @ts-ignore
+          particle("alexscaves:fallout", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 10); // ! MOD USED
+        },
+        () => {
+          // @ts-ignore
+          particle("minecraft:dust", [1, 0, 0], 3, rel(0, 0.8, 0), [5, 5, 5], 0.1, 1000);
+
+          // Fill Block
+          // Fill Block
+          const blocks: Array<string> = [
+            "alexscaves:thornwood_wood",
+            "alexscaves:porous_coprolith",
+            "alexscaves:peering_coprolith",
+            "minecraft:blackstone",
+            "iceandfire:dread_stone_tile",
+            "iceandfire:dread_stone_bricks_mossy",
+            "iceandfire:dread_stone_bricks_cracked",
+          ]; // ! MODS USED
+          for (let i = 1; i <= 40; i++) {
+            for (let j = 1; j <= 240; j++) {
+              let x = Math.cos(j) * i;
+              let z = Math.sin(j) * i;
+
+              execute.if
+                .block(rel(0, -1, 0), "#aestd1:all_but_air")
+                .run.setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
+            }
+          }
+
+          // Give darkness effect
+          effect.give(Selector("@a", { distance: [Infinity, 20] }), "minecraft:darkness", 10);
+
+          // Summon mobs
+          for (let i = 1; i <= 2; i++)
+            summon("alexscaves:forsaken", rel(randomIntFromInterval(-6, 6), 1, randomIntFromInterval(-6, 6))); // ! MODS USED
+
+          for (let i = 1; i <= 10; i++)
+            summon("alexscaves:vesper", rel(randomIntFromInterval(-10, 10), 1, randomIntFromInterval(-10, 10))); // ! MODS USED
+        },
+        null,
+        null
+      );
     });
 });
