@@ -26,19 +26,18 @@ export const TNT_PARENT_ENTITY: ENTITY_TYPES = "minecraft:armor_stand";
 /**
  * Places TNT at the specified location if the endermite has a certain tag.
  *
- * @param {Array<string>} tag - The tag used to check if the endermite is of a specific type
+ * @param {string} tag - The tag used to check if the endermite is of a specific type
  * @param {number} customModelData - The custom model data for the TNT item.
  */
-const placeTnt = (tag: Array<string>, customModelData: number) => {
+const placeTnt = (tag: string, customModelData: number) => {
   //* Run by the endermite
 
-  const tagWithPrefix = tag.map((item) => `tnt.${item}`);
-  _.if(Selector("@s", { tag: tag[0] }), () => {
+  _.if(Selector("@s", { tag: tag }), () => {
     playsound("minecraft:block.grass.place", "block", "@a", rel(0, 0, 0));
     summon("minecraft:armor_stand", rel(0, 0, 0), {
       NoGravity: NBT.byte(1),
       Invisible: NBT.byte(1),
-      Tags: [...tagWithPrefix, `tnt.as`],
+      Tags: [`tnt.${tag}`, `tnt.as`],
       DisabledSlots: 63,
       Small: NBT.byte(1),
       Passengers: [
@@ -61,10 +60,10 @@ const placeTnt = (tag: Array<string>, customModelData: number) => {
  *
  * @param {string} nameOfTheGiveFunction - The name of the give function.
  * @param {string} nameOfTheTnt - The name of the TNT item.
- * @param {Array<string>} tag - The tag associated with the TNT item.
+ * @param {string} tag - The tag associated with the TNT item.
  * @param {number} customModelData - The custom model data for the TNT item.
  */
-const createGiveFunction = (nameOfTheGiveFunction: string, nameOfTheTnt: string, tag: Array<string>, customModelData: number) => {
+const createGiveFunction = (nameOfTheGiveFunction: string, nameOfTheTnt: string, tag: string, customModelData: number) => {
   MCFunction("give_tnt/" + nameOfTheGiveFunction, () => {
     give(
       self,
@@ -76,7 +75,7 @@ const createGiveFunction = (nameOfTheGiveFunction: string, nameOfTheTnt: string,
         EntityTag: {
           Silent: NBT.byte(1),
           NoAI: NBT.byte(1),
-          Tags: [...tag, "tnt.endermite"],
+          Tags: [tag, "tnt.endermite"],
           ActiveEffects: [
             {
               Id: NBT.byte(14),
@@ -95,7 +94,7 @@ const createGiveFunction = (nameOfTheGiveFunction: string, nameOfTheTnt: string,
 export const placeAndCreateFunction = (
   nameOfTheGiveFunction: string,
   nameOfTheTnt: string,
-  tag: Array<string>,
+  tag: string,
   customModelData: number
 ) => {
   placeTnt(tag, customModelData);

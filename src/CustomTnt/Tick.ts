@@ -8,7 +8,8 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
     .at(self)
     .run(() => {
       // Creates the "Give TNT" function and does the processing if Custom TNT is placed
-      placeAndCreateFunction("give_5x", "5x TNT", ["5x", "5x.stable"], 110001);
+      placeAndCreateFunction("give_acid_tnt_stable", "Acid TNT: Stable", "acid.stable", 110001);
+      placeAndCreateFunction("give_acid_tnt_risky", "Acid TNT: Risky", "acid.risky", 120001);
     });
 });
 
@@ -18,12 +19,13 @@ export const handler = MCFunction("custom_tnt/handler", () => {
     .at(self)
     .run(() => {
       // Cycle through all the available TNT and pick the correct handler
+      // Acid TNT
       explosionHandler(
-        "tnt.5x.stable",
+        "tnt.acid.stable",
         100,
         () => {
           // @ts-ignore
-          particle("alexscaves:acid_bubble", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 2);
+          particle("alexscaves:acid_bubble", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 2); // ! MOD USED
         },
         () => {
           // @ts-ignore
@@ -44,13 +46,12 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           });
 
           // Fill the hole with acid
-          // ! MOD USED
           schedule.function(() => {
             execute
               .as(Selector("@e", { type: "armor_stand", tag: "tnt.acid.marker" }))
               .at(self)
               .run(() => {
-                const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:volcanic_core"];
+                const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:volcanic_core"]; // ! MOD USED
                 for (let i = -3; i <= 3; i++) {
                   for (let j = -3; j <= 3; j++) {
                     for (let k = -3; k <= 1; k++) {
@@ -67,6 +68,37 @@ export const handler = MCFunction("custom_tnt/handler", () => {
                 kill(self);
               });
           }, "2t");
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.acid.risky",
+        100,
+        () => {
+          // @ts-ignore
+          particle("alexscaves:amber_explosion", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 1); // ! MOD USED
+        },
+        () => {
+          // @ts-ignore
+          particle("minecraft:dust", [0, 1, 0], 1, rel(0, 0.8, 0), [2, 2, 2], 0.1, 1000);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = [
+            "alexscaves:acidic_radrock",
+            "alexscaves:radrock",
+            "alexscaves:volcanic_core",
+            "alexscaves:acid",
+          ]; // ! MODS USED
+          // Number of layers
+          for (let i = 1; i <= 10; i++) {
+            for (let j = 1; j <= 90; j++) {
+              let x = Math.cos(j) * i;
+              let z = Math.sin(j) * i;
+
+              setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
+            }
+          }
         },
         null,
         null
