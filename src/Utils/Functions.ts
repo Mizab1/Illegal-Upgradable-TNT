@@ -62,3 +62,10 @@ export function getRandomNumberInRange(min: number, max: number, exclude: number
   const randomIndex = Math.floor(Math.random() * availableValues.length);
   return availableValues[randomIndex];
 }
+
+export function randomWithDec(): number {
+  let randomNum = Math.random() * 2 - 1;
+  randomNum = randomNum === 0 ? 0.0 : randomNum;
+  randomNum = randomNum === 1 ? 1.0 : randomNum;
+  return parseFloat(randomNum.toFixed(3));
+}
