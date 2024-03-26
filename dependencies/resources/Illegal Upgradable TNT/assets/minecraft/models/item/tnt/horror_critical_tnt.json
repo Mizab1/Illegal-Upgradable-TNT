@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "custom/tnt/5x_tnt_bottom",
-		"1": "custom/tnt/5x_tnt_side",
-		"2": "custom/tnt/5x_tnt_top",
-		"particle": "custom/tnt/5x_tnt_bottom"
+		"0": "custom/tnt/horror_tnt_bottom",
+		"1": "custom/tnt/horror_critical_tnt_side",
+		"2": "custom/tnt/horror_tnt_top",
+		"particle": "custom/tnt/horror_tnt_bottom"
 	},
 	"elements": [
 		{
@@ -48,7 +48,7 @@
 			"scale": [0.6, 0.6, 0.6]
 		},
 		"head": {
-			"translation": [0, -4, 0],
+			"translation": [0, -3.75, 0],
 			"scale": [1.01, 1.01, 1.01]
 		},
 		"fixed": {
