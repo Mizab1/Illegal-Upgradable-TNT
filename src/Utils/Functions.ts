@@ -69,3 +69,60 @@ export function randomWithDec(): number {
   randomNum = randomNum === 1 ? 1.0 : randomNum;
   return parseFloat(randomNum.toFixed(3));
 }
+
+/**
+ * Replaces each block within the specified range (inclusive), excluding a specified block, with another block or a randomly selected block from an array of blocks.
+ *
+ * @param {[x: number, y: number, z: number]} from - The starting coordinates of the range (inclusive).
+ * @param {[x: number, y: number, z: number]} to - The ending coordinates of the range (inclusive).
+ * @param {LiteralUnion<BLOCKS>} blockToExclude - The block to exclude from replacement.
+ * @param {LiteralUnion<BLOCKS> | Array<LiteralUnion<BLOCKS>>} blockToPlace - The block or array of blocks to replace with.
+ * @return {void} This function does not return a value.
+ */
+export function forReplaceEachBlock(
+  from: [x: number, y: number, z: number],
+  to: [x: number, y: number, z: number],
+  blockToExclude: LiteralUnion<BLOCKS>,
+  blockToPlace: LiteralUnion<BLOCKS> | Array<LiteralUnion<BLOCKS>>
+): void {
+  for (let i = from[0]; i <= to[0]; i++) {
+    for (let j = from[1]; j <= to[1]; j++) {
+      for (let k = from[2]; k <= to[2]; k++) {
+        execute
+          .positioned(rel(i, j, k))
+          .if.block(rel(0, 0, 0), blockToExclude)
+          .run(() => {
+            if (typeof blockToPlace === "string") {
+              setblock(rel(0, 0, 0), blockToPlace);
+            } else if (Array.isArray(blockToPlace)) {
+              setblock(rel(0, 0, 0), blockToPlace[Math.floor(Math.random() * blockToPlace.length)]);
+            }
+          });
+      }
+    }
+  }
+}
+
+export function genDiscOfBlock(
+  radius: number,
+  density: number,
+  floorCoord: number,
+  blockToExclude: LiteralUnion<BLOCKS>,
+  blockToPlace: LiteralUnion<BLOCKS> | Array<LiteralUnion<BLOCKS>>,
+  radiusGap: number = 1
+): void {
+  for (let i = 1; i <= radius; i++) {
+    for (let j = 1; j <= density; j++) {
+      let x = Math.cos(j) * i * radiusGap;
+      let z = Math.sin(j) * i * radiusGap;
+
+      execute.if.block(rel(0, floorCoord, 0), blockToExclude).run(() => {
+        if (typeof blockToPlace === "string") {
+          setblock(rel(x, floorCoord, z), blockToPlace);
+        } else if (Array.isArray(blockToPlace)) {
+          setblock(rel(x, floorCoord, z), blockToPlace[Math.floor(Math.random() * blockToPlace.length)]);
+        }
+      });
+    }
+  }
+}
