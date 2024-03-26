@@ -1,4 +1,19 @@
-import { MCFunction, NBT, Selector, effect, execute, fill, kill, particle, rel, schedule, setblock, summon } from "sandstone";
+import {
+  MCFunction,
+  NBT,
+  Selector,
+  effect,
+  execute,
+  fill,
+  kill,
+  particle,
+  raw,
+  rel,
+  schedule,
+  setblock,
+  spreadplayers,
+  summon,
+} from "sandstone";
 import { self } from "../Tick";
 import { forReplaceEachBlock, genDiscOfBlock, randomIntFromInterval, randomWithDec } from "../Utils/Functions";
 import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./Private/SetupGenerics";
@@ -19,6 +34,11 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_horror_tnt_stable", "Horror TNT: Stable", "horror.stable", 110002);
       placeAndCreateFunction("give_horror_tnt_risky", "Horror TNT: Risky", "horror.risky", 120002);
       placeAndCreateFunction("give_horror_tnt_critical", "Horror TNT: Critical", "horror.critical", 130002);
+
+      // Horror TNT
+      placeAndCreateFunction("give_dino_tnt_stable", "Dinosaur TNT: Stable", "dino.stable", 110003);
+      placeAndCreateFunction("give_dino_tnt_risky", "Dinosaur TNT: Risky", "dino.risky", 120003);
+      placeAndCreateFunction("give_dino_tnt_critical", "Dinosaur TNT: Critical", "dino.critical", 130003);
     });
 });
 
@@ -311,6 +331,146 @@ export const handler = MCFunction("custom_tnt/handler", () => {
 
           for (let i = 1; i <= 10; i++)
             summon("alexscaves:vesper", rel(randomIntFromInterval(-10, 10), 1, randomIntFromInterval(-10, 10))); // ! MODS USED
+        },
+        null,
+        null
+      );
+
+      // Dino TNT
+      explosionHandler(
+        "tnt.dino.stable",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:lava", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+        },
+        () => {
+          const markerEntityContext = Selector("@e", { type: "minecraft:armor_stand", tag: "tnt.dino.stable.marker" });
+
+          // @ts-ignore
+          particle("minecraft:dust", [0, 1, 0], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 1000);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = [
+            "minecraft:moss_block",
+            "minecraft:mossy_cobblestone",
+            "alexscaves:amber_monolith",
+            "alexscaves:limestone",
+          ]; // ! MODS USED
+          // Number of layers
+          genDiscOfBlock(20, 120, -1, "#aestd1:all_but_air", blocks);
+
+          // Spawn tree marker
+          for (let i = 1; i <= 8; i++)
+            summon("minecraft:armor_stand", rel(0, 0, 0), {
+              Invisible: NBT.byte(1),
+              Tags: ["tnt.dino.stable.marker"],
+              NoGravity: NBT.byte(1),
+            });
+
+          // Spread the marker
+          spreadplayers(rel(0, 0), 4, 15, false, markerEntityContext);
+
+          // Spawn trees
+          execute
+            .as(markerEntityContext)
+            .at(self)
+            .run(() => {
+              raw(`place feature twilightforest:tree/canopy_tree ~ ~ ~`); // ! MODS USED
+              kill(self);
+            });
+
+          // Spawn mods
+          for (let i = 1; i <= 6; i++) {
+            summon("alexscaves:subterranodon", rel(0, 0, 0), {
+              Motion: [randomWithDec(), 0.8, randomWithDec()],
+            }); // ! MODS USED
+            summon("alexscaves:vallumraptor", rel(0, 0, 0), {
+              Motion: [randomWithDec(), 0.8, randomWithDec()],
+            }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.dino.risky",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:lava", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 1);
+          particle("minecraft:block", "alexscaves:volcanic_core", rel(0, 0.8, 0), [0.4, 0.4, 0.4], 0.1, 4); // ! MODS USED
+        },
+        () => {
+          const markerEntityContext = Selector("@e", { type: "minecraft:armor_stand", tag: "tnt.dino.stable.marker" });
+
+          // @ts-ignore
+          particle("minecraft:dust", [0, 1, 0], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 1000);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = ["minecraft:moss_block", "minecraft:mossy_cobblestone", "alexscaves:volcanic_core"]; // ! MODS USED
+          genDiscOfBlock(30, 120, -1, "#aestd1:all_but_air", blocks);
+
+          for (let i = 1; i <= 20; i++) {
+            let x = Math.cos(randomIntFromInterval(-5, 5)) * i * 4;
+            let z = Math.sin(randomIntFromInterval(-5, 5)) * i * 4;
+
+            setblock(rel(x, 3, z), "alexscaves:volcanic_core");
+            setblock(rel(x, 2, z), "alexscaves:volcanic_core");
+            setblock(rel(x, 1, z), "alexscaves:volcanic_core");
+            setblock(rel(x, 0, z), "alexscaves:volcanic_core");
+          }
+
+          // Spawn tree marker
+          for (let i = 1; i <= 10; i++)
+            summon("minecraft:armor_stand", rel(0, 0, 0), {
+              Invisible: NBT.byte(1),
+              Tags: ["tnt.dino.stable.marker"],
+              NoGravity: NBT.byte(1),
+            });
+
+          // Spread the marker
+          spreadplayers(rel(0, 0), 6, 25, false, markerEntityContext);
+
+          // Spawn trees
+          execute
+            .as(markerEntityContext)
+            .at(self)
+            .run(() => {
+              raw(`place feature twilightforest:tree/dead_canopy_tree ~ ~ ~`); // ! MODS USED
+              kill(self);
+            });
+
+          // Spawn mods
+          for (let i = 1; i <= 6; i++) {
+            summon("alexscaves:grottoceratops", rel(0, 20, 0), { Tags: ["new"] }); // ! MODS USED
+            summon("alexscaves:relicheirus", rel(0, 20, 0), { Tags: ["new"] }); // ! MODS USED
+          }
+          const newMob = Selector("@e", { tag: "new" });
+          spreadplayers(rel(0, 0), 10, 20, false, newMob);
+          execute.as(newMob).run.tag(self).remove("new");
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.dino.critical",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:lava", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 1);
+          particle("minecraft:poof", rel(0, 0.8, 0), [0.1, 0.3, 0.1], 0.1, 3);
+          particle("minecraft:block", "alexscaves:volcanic_core", rel(0, 0.8, 0), [0.4, 0.4, 0.4], 0.1, 4); // ! MODS USED
+        },
+        () => {
+          // @ts-ignore
+          particle("minecraft:dust", [0, 1, 0], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 1000);
+
+          // Spawn mods
+          for (let i = 1; i <= 4; i++) {
+            summon("alexscaves:tremorsaurus", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+          summon("alexscaves:luxtructosaurus", rel(0, 0, 0)); // ! MODS USED
         },
         null,
         null
