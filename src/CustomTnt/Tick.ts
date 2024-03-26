@@ -1,6 +1,6 @@
 import { MCFunction, NBT, Selector, effect, execute, fill, kill, particle, rel, schedule, setblock, summon } from "sandstone";
 import { self } from "../Tick";
-import { randomIntFromInterval, randomWithDec } from "../Utils/Functions";
+import { forReplaceEachBlock, genDiscOfBlock, randomIntFromInterval, randomWithDec } from "../Utils/Functions";
 import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./Private/SetupGenerics";
 
 export const setTntblock = MCFunction("custom_tnt/setblock", () => {
@@ -62,19 +62,9 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               .at(self)
               .run(() => {
                 const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:volcanic_core"]; // ! MOD USED
-                for (let i = -3; i <= 3; i++) {
-                  for (let j = -3; j <= 3; j++) {
-                    for (let k = -3; k <= -1; k++) {
-                      execute
-                        .positioned(rel(i, k, j))
-                        .if.block(rel(0, 0, 0), "#aestd1:all_but_air")
-                        .run(() => {
-                          setblock(rel(0, 0, 0), blocks[Math.floor(Math.random() * blocks.length)]);
-                        });
-                    }
-                  }
-                }
+                forReplaceEachBlock([-3, -3, -3], [3, -1, 3], "#aestd1:all_but_air", blocks);
                 fill(rel(5, -1, 5), rel(-5, -5, -5), "alexscaves:acid replace #aestd1:air");
+
                 kill(self);
               });
           }, "2t");
@@ -101,16 +91,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             "alexscaves:acid",
           ]; // ! MODS USED
           // Number of layers
-          for (let i = 1; i <= 10; i++) {
-            for (let j = 1; j <= 90; j++) {
-              let x = Math.cos(j) * i;
-              let z = Math.sin(j) * i;
-
-              execute.if
-                .block(rel(0, -1, 0), "#aestd1:all_but_air")
-                .run.setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
-            }
-          }
+          genDiscOfBlock(10, 90, -1, "#aestd1:all_but_air", blocks);
 
           // Spawn nucleeper
           for (let i = 1; i <= 4; i++) {
@@ -148,16 +129,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
 
           // Place a lot of blocks
           const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:acid"]; // ! MODS USED
-          for (let i = 1; i <= 15; i++) {
-            for (let j = 1; j <= 180; j++) {
-              let x = Math.cos(j) * i * 3;
-              let z = Math.sin(j) * i * 3;
-
-              execute.if
-                .block(rel(0, -1, 0), "#aestd1:all_but_air")
-                .run.setblock(rel(x, -1, z), blocks[Math.floor(Math.random() * blocks.length)]);
-            }
-          }
+          genDiscOfBlock(15, 180, -1, "#aestd1:all_but_air", blocks, 3);
 
           // Fill the hole and place mobs
           schedule.function(() => {
