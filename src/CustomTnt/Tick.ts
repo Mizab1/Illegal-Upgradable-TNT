@@ -15,7 +15,7 @@ import {
   summon,
 } from "sandstone";
 import { self } from "../Tick";
-import { forReplaceEachBlock, genDiscOfBlock, randomIntFromInterval, randomWithDec } from "../Utils/Functions";
+import { fillRandom, genDiscOfBlock, randomIntFromInterval, randomWithDec } from "../Utils/Functions";
 import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./Private/SetupGenerics";
 
 export const setTntblock = MCFunction("custom_tnt/setblock", () => {
@@ -35,10 +35,15 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_horror_tnt_risky", "Horror TNT: Risky", "horror.risky", 120002);
       placeAndCreateFunction("give_horror_tnt_critical", "Horror TNT: Critical", "horror.critical", 130002);
 
-      // Horror TNT
+      // Dino TNT
       placeAndCreateFunction("give_dino_tnt_stable", "Dinosaur TNT: Stable", "dino.stable", 110003);
       placeAndCreateFunction("give_dino_tnt_risky", "Dinosaur TNT: Risky", "dino.risky", 120003);
       placeAndCreateFunction("give_dino_tnt_critical", "Dinosaur TNT: Critical", "dino.critical", 130003);
+
+      // Magnetic TNT
+      placeAndCreateFunction("give_magnetic_tnt_stable", "Magnetic TNT: Stable", "magnetic.stable", 110004);
+      placeAndCreateFunction("give_magnetic_tnt_risky", "Magnetic TNT: Risky", "magnetic.risky", 120004);
+      placeAndCreateFunction("give_magnetic_tnt_critical", "Magnetic TNT: Critical", "magnetic.critical", 130004);
     });
 });
 
@@ -82,7 +87,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               .at(self)
               .run(() => {
                 const blocks: Array<string> = ["alexscaves:acidic_radrock", "alexscaves:radrock", "alexscaves:volcanic_core"]; // ! MOD USED
-                forReplaceEachBlock([-3, -3, -3], [3, -1, 3], "#aestd1:all_but_air", blocks);
+                fillRandom([-3, -3, -3], [3, -1, 3], "#aestd1:all_but_air", blocks);
                 fill(rel(5, -1, 5), rel(-5, -5, -5), "alexscaves:acid replace #aestd1:air");
 
                 kill(self);
@@ -471,6 +476,126 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             summon("alexscaves:tremorsaurus", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
           }
           summon("alexscaves:luxtructosaurus", rel(0, 0, 0)); // ! MODS USED
+        },
+        null,
+        null
+      );
+
+      // Magnetic TNT
+      explosionHandler(
+        "tnt.magnetic.stable",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "alexscaves:azure_neodymium_pillar", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2); // ! MODS USED
+        },
+        () => {
+          // @ts-ignore
+          particle("minecraft:dust", [1, 0, 0], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 500);
+          // @ts-ignore
+          particle("minecraft:dust", [0, 0, 1], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 500);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = ["alexscaves:azure_neodymium_pillar", "alexscaves:scarlet_neodymium_pillar"]; // ! MODS USED
+          fillRandom([-5, -5, -5], [5, -1, 5], "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 4; i++) {
+            summon("alexscaves:ferrouslime", rel(0, 2, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexscaves:notor", rel(0, 2, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.magnetic.risky",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "alexscaves:azure_neodymium_pillar", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2); // ! MODS USED
+          particle("minecraft:block", "alexscaves:scarlet_neodymium_pillar", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2); // ! MODS USED
+        },
+        () => {
+          // @ts-ignore
+          particle("minecraft:dust", [1, 0, 0], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 1000);
+          // @ts-ignore
+          particle("minecraft:dust", [0, 0, 1], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 1000);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = [
+            "alexscaves:azure_neodymium_pillar",
+            "alexscaves:scarlet_neodymium_pillar",
+            "alexscaves:block_of_azure_neodymium",
+            "alexscaves:block_of_scarlet_neodymium",
+          ]; // ! MODS USED
+          fillRandom([-8, -5, -8], [8, -1, 8], "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 4; i++) {
+            summon("alexscaves:boundroid", rel(0, 2, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexscaves:teletor", rel(randomIntFromInterval(-1, 1), 2, randomIntFromInterval(-1, 1))); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.magnetic.critical",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "alexscaves:azure_neodymium_pillar", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2); // ! MODS USED
+          particle("minecraft:block", "alexscaves:scarlet_neodymium_pillar", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2); // ! MODS USED
+          // @ts-ignore
+          particle("alexscaves:magnetic_caves_ambient", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 1); // ! MODS USED
+        },
+        () => {
+          const markerEntityContext = Selector("@e", { type: "minecraft:armor_stand", tag: "tnt.magnetic.critical.marker" });
+
+          // @ts-ignore
+          particle("minecraft:dust", [1, 0, 0], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 1000);
+          // @ts-ignore
+          particle("minecraft:dust", [0, 0, 1], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 1000);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = [
+            "alexscaves:azure_neodymium_pillar",
+            "alexscaves:scarlet_neodymium_pillar",
+            "alexscaves:block_of_azure_neodymium",
+            "alexscaves:block_of_scarlet_neodymium",
+            "alexscaves:scrap_metal",
+            "alexscaves:scrap_metal_plate",
+          ]; // ! MODS USED
+          fillRandom([-10, -5, -10], [10, -1, 10], "#aestd1:all_but_air", blocks);
+
+          // Spawn tesla bulb marker
+          for (let i = 1; i <= 5; i++)
+            summon("minecraft:armor_stand", rel(0, 0, 0), {
+              Invisible: NBT.byte(1),
+              Tags: ["tnt.magnetic.critical.marker"],
+              NoGravity: NBT.byte(1),
+            });
+
+          // Spread the marker
+          spreadplayers(rel(0, 0), 2, 10, false, markerEntityContext);
+
+          // Spawn tesla bulb
+          execute
+            .as(markerEntityContext)
+            .at(self)
+            .run(() => {
+              setblock(rel(0, 0, 0), "alexscaves:tesla_bulb"); // ! MODS USED
+              kill(self);
+            });
+
+          // Spawn mods
+          for (let i = 1; i <= 3; i++) {
+            summon("alexscaves:boundroid", rel(0, 2, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexscaves:teletor", rel(randomIntFromInterval(-1, 1), 2, randomIntFromInterval(-1, 1))); // ! MODS USED
+          }
+          for (let i = 1; i <= 2; i++)
+            summon("alexscaves:magnetron", rel(0, 2, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
         },
         null,
         null

@@ -20,4 +20,9 @@ export const upgradeTNT = MCFunction("custom_tnt/upgrade_tnt", () => {
   upgradeTNTGenerics("dino.risky", "dino.critical", 130003, "Dinosaur TNT: Risky", "red");
   upgradeTNTGenerics("dino.stable", "dino.risky", 120003, "Dinosaur TNT: Stable", "yellow");
   // Tier 1 is default/base TNT
+
+  // Magnetic TNT
+  upgradeTNTGenerics("magnetic.risky", "magnetic.critical", 130004, "Magnetic TNT: Risky", "red");
+  upgradeTNTGenerics("magnetic.stable", "magnetic.risky", 120004, "Magnetic TNT: Stable", "yellow");
+  // Tier 1 is default/base TNT
 });
