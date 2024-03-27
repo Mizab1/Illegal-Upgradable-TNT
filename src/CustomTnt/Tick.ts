@@ -683,10 +683,13 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             "alexsmobs:leafcutter_anthill",
             "minecraft:grass_block",
           ]; // ! MODS USED
-          genDiscOfBlock(40, 45, -1, "#aestd1:all_but_air", blocks);
+          genDiscOfBlock(30, 45, -1, "#aestd1:all_but_air", blocks);
 
           // Spawn mods
           for (let i = 1; i <= 3; i++) {
+            summon("alexsmobs:rhinoceros", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:elephant", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:gorilla", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:grizzly_bear", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:tiger", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:anaconda", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
