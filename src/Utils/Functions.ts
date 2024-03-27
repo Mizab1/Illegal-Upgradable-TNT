@@ -126,3 +126,18 @@ export function genDiscOfBlock(
     }
   }
 }
+
+export function genDiscOfBlock2(radius: number, pointDensity: number): void {
+  const circumference: number = 2 * Math.PI * radius;
+  const numPoints: number = Math.ceil(circumference * pointDensity);
+
+  const angleIncrement: number = (2 * Math.PI) / numPoints;
+
+  for (let i = 0; i < numPoints; i++) {
+    const angle: number = i * angleIncrement;
+    const x: number = parseFloat((radius * Math.cos(angle)).toFixed(3));
+    const z: number = parseFloat((radius * Math.sin(angle)).toFixed(3));
+
+    setblock(rel(x, 0, z), "minecraft:stone");
+  }
+}
