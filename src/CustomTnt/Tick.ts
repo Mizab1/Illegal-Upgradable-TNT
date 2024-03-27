@@ -653,15 +653,13 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           genDiscOfBlock(20, 45, -1, "#aestd1:all_but_air", blocks);
 
           // Spawn mods
-          for (let i = 1; i <= 3; i++) {
-            summon("alexsmobs:cosmaw", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          for (let i = 1; i <= 4; i++) {
             summon("alexsmobs:elephant", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:gorilla", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:snow_leopard", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
-            summon("alexsmobs:underminer", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:rhinoceros", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:rattlesnake", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
-            summon("alexsmobs:anaconda", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:kangaroo", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
           }
         },
         null,
@@ -689,15 +687,14 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           genDiscOfBlock(40, 45, -1, "#aestd1:all_but_air", blocks);
 
           // Spawn mods
-          for (let i = 1; i <= 2; i++) {
-            summon("alexsmobs:bone_serpent", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          for (let i = 1; i <= 3; i++) {
             summon("alexsmobs:grizzly_bear", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
-            summon("alexsmobs:dropbear", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:tiger", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:anaconda", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:crocodile", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:komodo_dragon", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:centipede_head", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
           }
-          // Boss Mobs
-          summon("alexsmobs:warped_mosco", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
-          summon("alexsmobs:void_worm", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
         },
         null,
         null
