@@ -629,7 +629,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             summon("alexsmobs:gazelle", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:hummingbird", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:maned_wolf", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
-            summon("alexsmobs:mungus", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:sugar_glider", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
             summon("alexsmobs:toucan", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
           }
