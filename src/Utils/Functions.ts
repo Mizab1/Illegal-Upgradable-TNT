@@ -127,7 +127,7 @@ export function genDiscOfBlock(
   }
 }
 
-export function genDiscOfBlock2(radius: number, pointDensity: number): void {
+export function genFullDiscOfBlock(radius: number, pointDensity: number): void {
   const circumference: number = 2 * Math.PI * radius;
   const numPoints: number = Math.ceil(circumference * pointDensity);
 
