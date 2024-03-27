@@ -25,4 +25,9 @@ export const upgradeTNT = MCFunction("custom_tnt/upgrade_tnt", () => {
   upgradeTNTGenerics("magnetic.risky", "magnetic.critical", 130004, "Magnetic TNT: Risky", "red");
   upgradeTNTGenerics("magnetic.stable", "magnetic.risky", 120004, "Magnetic TNT: Stable", "yellow");
   // Tier 1 is default/base TNT
+
+  // Safari TNT
+  upgradeTNTGenerics("safari.risky", "safari.critical", 130005, "Safari TNT: Risky", "red");
+  upgradeTNTGenerics("safari.stable", "safari.risky", 120005, "Safari TNT: Stable", "yellow");
+  // Tier 1 is default/base TNT
 });

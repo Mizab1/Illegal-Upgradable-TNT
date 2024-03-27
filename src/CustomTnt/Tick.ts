@@ -44,6 +44,11 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_magnetic_tnt_stable", "Magnetic TNT: Stable", "magnetic.stable", 110004);
       placeAndCreateFunction("give_magnetic_tnt_risky", "Magnetic TNT: Risky", "magnetic.risky", 120004);
       placeAndCreateFunction("give_magnetic_tnt_critical", "Magnetic TNT: Critical", "magnetic.critical", 130004);
+
+      // Safari TNT
+      placeAndCreateFunction("give_safari_tnt_stable", "Safari TNT: Stable", "safari.stable", 110005);
+      placeAndCreateFunction("give_safari_tnt_risky", "Safari TNT: Risky", "safari.risky", 120005);
+      placeAndCreateFunction("give_safari_tnt_critical", "Safari TNT: Critical", "safari.critical", 130005);
     });
 });
 
@@ -596,6 +601,103 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           }
           for (let i = 1; i <= 2; i++)
             summon("alexscaves:magnetron", rel(0, 2, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+        },
+        null,
+        null
+      );
+
+      // Safari TNT
+      explosionHandler(
+        "tnt.safari.stable",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "minecraft:grass_block", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+        },
+        () => {
+          particle("minecraft:happy_villager", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = ["minecraft:grass_block"];
+          genDiscOfBlock(10, 45, -1, "#aestd1:all_but_air", blocks);
+          genDiscOfBlock(10, 15, 0, "#aestd1:air", "minecraft:grass");
+
+          // Spawn mods
+          for (let i = 1; i <= 5; i++) {
+            summon("alexsmobs:blue_jay", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:crow", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:gazelle", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:hummingbird", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:maned_wolf", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:mungus", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:sugar_glider", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:toucan", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.safari.risky",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "minecraft:grass_block", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+          particle("minecraft:block", "minecraft:mossy_stone_bricks", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+        },
+        () => {
+          particle("minecraft:angry_villager", rel(0, 1, 0), [10, 2, 10], 0.1, 250);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = ["minecraft:grass_block", "minecraft:mossy_stone_bricks", "minecraft:mossy_cobblestone"];
+          genDiscOfBlock(20, 45, -1, "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 3; i++) {
+            summon("alexsmobs:cosmaw", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:elephant", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:gorilla", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:snow_leopard", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:underminer", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:rhinoceros", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:rattlesnake", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:anaconda", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.safari.critical",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "minecraft:grass_block", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+          particle("minecraft:block", "alexsmobs:leafcutter_ant_chamber", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+          particle("minecraft:block", "alexsmobs:bison_fur_block", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+        },
+        () => {
+          particle("minecraft:poof", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Place a lot of blocks
+          const blocks: Array<string> = [
+            "alexsmobs:bison_fur_block",
+            "alexsmobs:leafcutter_ant_chamber",
+            "alexsmobs:leafcutter_anthill",
+            "minecraft:grass_block",
+          ]; // ! MODS USED
+          genDiscOfBlock(40, 45, -1, "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 2; i++) {
+            summon("alexsmobs:bone_serpent", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:grizzly_bear", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:dropbear", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("alexsmobs:tiger", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+          // Boss Mobs
+          summon("alexsmobs:warped_mosco", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          summon("alexsmobs:void_worm", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
         },
         null,
         null
