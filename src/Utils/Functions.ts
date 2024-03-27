@@ -79,7 +79,7 @@ export function randomWithDec(): number {
  * @param {LiteralUnion<BLOCKS> | Array<LiteralUnion<BLOCKS>>} blockToPlace - The block or array of blocks to replace with.
  * @return {void} This function does not return a value.
  */
-export function forReplaceEachBlock(
+export function fillRandom(
   from: [x: number, y: number, z: number],
   to: [x: number, y: number, z: number],
   blockToExclude: LiteralUnion<BLOCKS>,
