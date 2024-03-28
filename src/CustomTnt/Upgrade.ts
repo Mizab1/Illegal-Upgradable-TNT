@@ -30,4 +30,9 @@ export const upgradeTNT = MCFunction("custom_tnt/upgrade_tnt", () => {
   upgradeTNTGenerics("safari.risky", "safari.critical", 130005, "Safari TNT: Risky", "red");
   upgradeTNTGenerics("safari.stable", "safari.risky", 120005, "Safari TNT: Stable", "yellow");
   // Tier 1 is default/base TNT
+
+  // Twilight Forest TNT
+  upgradeTNTGenerics("twilight.risky", "twilight.critical", 130005, "Twilight Forest TNT: Risky", "red");
+  upgradeTNTGenerics("twilight.stable", "twilight.risky", 120005, "Twilight Forest TNT: Stable", "yellow");
+  // Tier 1 is default/base TNT
 });

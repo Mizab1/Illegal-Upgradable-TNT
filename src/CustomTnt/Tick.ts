@@ -13,6 +13,7 @@ import {
   setblock,
   spreadplayers,
   summon,
+  time,
 } from "sandstone";
 import { self } from "../Tick";
 import { fillRandom, genDiscOfBlock, randomIntFromInterval, randomWithDec } from "../Utils/Functions";
@@ -49,6 +50,11 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_safari_tnt_stable", "Safari TNT: Stable", "safari.stable", 110005);
       placeAndCreateFunction("give_safari_tnt_risky", "Safari TNT: Risky", "safari.risky", 120005);
       placeAndCreateFunction("give_safari_tnt_critical", "Safari TNT: Critical", "safari.critical", 130005);
+
+      // Twilight Forest TNT
+      placeAndCreateFunction("give_twilight_tnt_stable", "Twilight Forest TNT: Stable", "twilight.stable", 110006);
+      placeAndCreateFunction("give_twilight_tnt_risky", "Twilight Forest TNT: Risky", "twilight.risky", 120006);
+      placeAndCreateFunction("give_twilight_tnt_critical", "Twilight Forest TNT: Critical", "twilight.critical", 130006);
     });
 });
 
@@ -699,6 +705,178 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           }
         },
         null,
+        null
+      );
+
+      // Twilight Forest TNT
+      explosionHandler(
+        "tnt.twilight.stable",
+        100,
+        () => {
+          // @ts-ignore
+          particle("twilightforest:firefly", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 1);
+          particle("minecraft:flame", rel(0, 0.8, 0), [0.0, 0.1, 0.0], 0.1, 1);
+        },
+        () => {
+          particle("minecraft:happy_villager", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Make a hole
+          summon("minecraft:creeper", rel(0, 0, 0), {
+            Fuse: 0,
+            ignited: NBT.byte(1),
+            ExplosionRadius: NBT.byte(3),
+            CustomName: '{"text":"TNT","italic":false}',
+          });
+          summon("minecraft:armor_stand", rel(0, 0, 0), {
+            Invisible: NBT.byte(1),
+            Tags: ["tnt.twilight_stable.marker"],
+            Marker: NBT.byte(1),
+            NoGravity: NBT.byte(1),
+          });
+
+          // Fill the hole
+          schedule.function(() => {
+            execute
+              .as(Selector("@e", { type: "armor_stand", tag: "tnt.twilight_stable.marker" }))
+              .at(self)
+              .run(() => {
+                const blocks: Array<string> = ["minecraft:grass_block"]; // ! MOD USED
+                fillRandom([-8, -3, -8], [8, -1, 8], "#aestd1:all_but_air", blocks);
+                fill(rel(5, -1, 5), rel(-5, -5, -5), "minecraft:water replace #aestd1:air");
+
+                // Spawn Mobs
+                for (let i = 1; i <= 3; i++) {
+                  summon("twilightforest:carminite_broodling", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:fire_beetle", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:hedge_spider", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:helmet_crab", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:swarm_spider", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:kobold", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                }
+
+                kill(self);
+              });
+          }, "2t");
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.twilight.risky",
+        100,
+        () => {
+          // @ts-ignore
+          particle("twilightforest:firefly", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 1);
+          particle("minecraft:soul_fire_flame", rel(0, 0.8, 0), [0.0, 0.1, 0.0], 0.1, 1);
+        },
+        () => {
+          particle("minecraft:angry_villager", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Set the time to night
+          time.set("night");
+
+          // Make a hole
+          summon("minecraft:creeper", rel(0, 0, 0), {
+            Fuse: 0,
+            ignited: NBT.byte(1),
+            ExplosionRadius: NBT.byte(6),
+            CustomName: '{"text":"TNT","italic":false}',
+          });
+          summon("minecraft:armor_stand", rel(0, 0, 0), {
+            Invisible: NBT.byte(1),
+            Tags: ["tnt.twilight_stable.marker"],
+            Marker: NBT.byte(1),
+            NoGravity: NBT.byte(1),
+          });
+
+          // Fill the hole
+          schedule.function(() => {
+            execute
+              .as(Selector("@e", { type: "armor_stand", tag: "tnt.twilight_stable.marker" }))
+              .at(self)
+              .run(() => {
+                const blocks: Array<string> = ["minecraft:grass_block", "minecraft:mossy_cobblestone"]; // ! MOD USED
+                fillRandom([-10, -3, -10], [10, -1, 10], "#aestd1:all_but_air", blocks);
+                fill(rel(5, -1, 5), rel(-5, -5, -5), "minecraft:water replace #aestd1:air");
+
+                // Spawn Mobs
+                for (let i = 1; i <= 3; i++) {
+                  summon("twilightforest:king_spider", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:death_tome", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:yeti", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:skeleton_druid", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:minotaur", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                }
+                summon("twilightforest:lich", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+
+                kill(self);
+              });
+          }, "2t");
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.twilight.critical",
+        100,
+        () => {
+          // @ts-ignore
+          particle("twilightforest:ominous_flame", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 8); // ! MOD USED
+          // @ts-ignore
+          particle("twilightforest:snow_guardian", rel(0, 0.8, 0), [0.4, 0.4, 0.4], 0.1, 5);
+          particle("minecraft:block", "minecraft:snow_block", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 4);
+        },
+        () => {
+          particle("minecraft:angry_villager", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Set the time to night
+          time.set("night");
+
+          // Make a hole
+          summon("minecraft:creeper", rel(0, 0, 0), {
+            Fuse: 0,
+            ignited: NBT.byte(1),
+            ExplosionRadius: NBT.byte(6),
+            CustomName: '{"text":"TNT","italic":false}',
+          });
+          summon("minecraft:armor_stand", rel(0, 0, 0), {
+            Invisible: NBT.byte(1),
+            Tags: ["tnt.twilight_stable.marker"],
+            Marker: NBT.byte(1),
+            NoGravity: NBT.byte(1),
+          });
+
+          // Fill the hole
+          schedule.function(() => {
+            execute
+              .as(Selector("@e", { type: "armor_stand", tag: "tnt.twilight_stable.marker" }))
+              .at(self)
+              .run(() => {
+                const blocks: Array<string> = ["minecraft:grass_block", "minecraft:mossy_cobblestone", "minecraft:snow_block"]; // ! MOD USED
+                fillRandom([-15, -3, -15], [15, -1, 15], "#aestd1:all_but_air", blocks);
+                fill(rel(6, -1, 6), rel(-6, -6, -6), "minecraft:water replace #aestd1:air");
+
+                // Spawn Mobs
+                for (let i = 1; i <= 3; i++) {
+                  summon("twilightforest:carminite_ghastguard", rel(0, 1, 0), {
+                    Motion: [randomWithDec(), 0.8, randomWithDec()],
+                  }); // ! MODS USED
+                  summon("twilightforest:carminite_golem", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:adherent", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:wraith", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                  summon("twilightforest:mist_wolf", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                }
+                summon("twilightforest:hydra", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+                summon("twilightforest:ur_ghast", rel(0, 1, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+
+                kill(self);
+              });
+          }, "2t");
+        },
+        () => {
+          // Set the time to night
+          time.set("night");
+        },
         null
       );
     });
