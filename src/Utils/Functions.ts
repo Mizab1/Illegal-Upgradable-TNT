@@ -65,9 +65,16 @@ export function getRandomNumberInRange(min: number, max: number, exclude: number
 
 export function randomWithDec(): number {
   let randomNum = Math.random() * 2 - 1;
-  randomNum = randomNum === 0 ? 0.0 : randomNum;
-  randomNum = randomNum === 1 ? 1.0 : randomNum;
-  return parseFloat(randomNum.toFixed(3));
+  let shortRandomNum = parseFloat(randomNum.toFixed(1));
+
+  if (shortRandomNum == 0.0) {
+    shortRandomNum = 0.1;
+  } else if (shortRandomNum == -1.0) {
+    shortRandomNum = -0.9;
+  } else if (shortRandomNum == 1.0) {
+    shortRandomNum = 0.9;
+  }
+  return shortRandomNum;
 }
 
 /**
