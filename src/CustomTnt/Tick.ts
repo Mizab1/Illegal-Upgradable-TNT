@@ -5,6 +5,7 @@ import {
   effect,
   execute,
   fill,
+  give,
   kill,
   particle,
   raw,
@@ -13,6 +14,8 @@ import {
   setblock,
   spreadplayers,
   summon,
+  teleport,
+  tellraw,
   time,
 } from "sandstone";
 import { self } from "../Tick";
@@ -55,6 +58,11 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_twilight_tnt_stable", "Twilight Forest TNT: Stable", "twilight.stable", 110006);
       placeAndCreateFunction("give_twilight_tnt_risky", "Twilight Forest TNT: Risky", "twilight.risky", 120006);
       placeAndCreateFunction("give_twilight_tnt_critical", "Twilight Forest TNT: Critical", "twilight.critical", 130006);
+
+      // Aquatic TNT
+      placeAndCreateFunction("give_aquatic_tnt_stable", "Aquatic TNT: Stable", "aquatic.stable", 110007);
+      placeAndCreateFunction("give_aquatic_tnt_risky", "Aquatic TNT: Risky", "aquatic.risky", 120007);
+      placeAndCreateFunction("give_aquatic_tnt_critical", "Aquatic TNT: Critical", "aquatic.critical", 130007);
     });
 });
 
@@ -877,6 +885,133 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           // Set the time to night
           time.set("night");
         },
+        null
+      );
+
+      // Deadly Deep TNT
+      explosionHandler(
+        "tnt.aquatic.stable",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "minecraft:water", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+          particle("minecraft:falling_water", rel(0, 0.8, 0), [0.5, 0.5, 0.5], 0.1, 4);
+        },
+        () => {
+          particle("minecraft:falling_water", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Fill with water
+          fill(rel(-8, -5, -8), rel(8, 0, 8), "minecraft:water replace #aestd1:all_but_air");
+
+          // Spawn mods
+          for (let i = 1; i <= 15; i++) {
+            summon("alexscaves:lanternfish", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            summon("alexscaves:sea_pig", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            summon("alexscaves:trilocaris", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+          }
+          for (let i = 1; i <= 8; i++) {
+            summon("alexscaves:gossamer_worm", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            summon("alexscaves:tripodfish", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.aquatic.risky",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "minecraft:water", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+          particle("minecraft:falling_water", rel(0, 0.8, 0), [0.5, 0.5, 0.5], 0.1, 4);
+          particle("minecraft:flame", rel(0, 0.8, 0), [0.0, 0.1, 0.0], 0.1, 1);
+        },
+        () => {
+          // Change the positional context
+          execute.positioned(rel(0, -60, 0)).run(() => {
+            // Make a cube of water
+            for (let i = -20; i <= 20; i++) {
+              fill(rel(-20, i, -20), rel(20, i, 20), "minecraft:water");
+            }
+
+            // Summon mobs
+            for (let i = 1; i <= 25; i++) {
+              summon("alexscaves:lanternfish", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            }
+            for (let i = 1; i <= 6; i++) {
+              summon("alexscaves:hullbreaker", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            }
+            for (let i = 1; i <= 8; i++) {
+              summon("alexscaves:deep_one", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+              summon("alexscaves:deep_one_knight", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+              summon("alexscaves:deep_one_mage", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            }
+
+            // Teleport player
+            teleport("@a", rel(0, 0, 0));
+
+            // Give diving suit to the player
+            give("@a", "alexscaves:diving_helmet", 1); // ! MODS USED
+            give("@a", "alexscaves:diving_boots", 1); // ! MODS USED
+            give("@a", "alexscaves:diving_chestplate", 1); // ! MODS USED
+            give("@a", "alexscaves:diving_leggings", 1); // ! MODS USED
+            raw(`give @p potion{Potion:"alexscaves:deepsight"} 4`); // ! MODS USED
+
+            tellraw("@a", { text: "You've got a diving suit and deep vision potion!", color: "gold" });
+          });
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.aquatic.critical",
+        100,
+        () => {
+          // @ts-ignore
+          particle("minecraft:block", "minecraft:water", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+          particle("minecraft:block", "minecraft:snow_block", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 2);
+          particle("minecraft:falling_water", rel(0, 0.8, 0), [0.5, 0.5, 0.5], 0.1, 4);
+          particle("minecraft:flame", rel(0, 0.8, 0), [0.0, 0.1, 0.0], 0.1, 1);
+          particle("minecraft:soul_fire_flame", rel(0, 0.8, 0), [0.0, 0.1, 0.0], 0.1, 1);
+        },
+        () => {
+          // Change the positional context
+          execute.positioned(rel(0, -60, 0)).run(() => {
+            // Make a cube of water
+            for (let i = -40; i <= 40; i++) {
+              fill(rel(-40, i, -40), rel(40, i, 40), "minecraft:water");
+            }
+
+            // Summon mobs
+            for (let i = 1; i <= 40; i++) {
+              summon("alexscaves:lanternfish", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            }
+            for (let i = 1; i <= 10; i++) {
+              summon("alexscaves:hullbreaker", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+              summon("alexscaves:mine_guardian", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            }
+            for (let i = 1; i <= 15; i++) {
+              summon("alexscaves:deep_one", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+              summon("alexscaves:deep_one_knight", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+              summon("alexscaves:deep_one_mage", rel(0, -2, 0), { Motion: [randomWithDec(), 0.1, randomWithDec()] }); // ! MODS USED
+            }
+
+            // Teleport player
+            teleport("@a", rel(0, 0, 0));
+
+            // Give diving suit to the player
+            give("@a", "alexscaves:diving_helmet", 1); // ! MODS USED
+            give("@a", "alexscaves:diving_boots", 1); // ! MODS USED
+            give("@a", "alexscaves:diving_chestplate", 1); // ! MODS USED
+            give("@a", "alexscaves:diving_leggings", 1); // ! MODS USED
+
+            give("@a", "alexscaves:submarine", 1); // ! MODS USED
+            raw(`give @p potion{Potion:"alexscaves:deepsight"} 4`); // ! MODS USED
+
+            tellraw("@a", { text: "You've got a diving suit and deep vision potion and submarine!", color: "gold" });
+          });
+        },
+        null,
         null
       );
     });

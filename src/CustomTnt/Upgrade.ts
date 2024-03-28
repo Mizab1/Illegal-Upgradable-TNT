@@ -32,7 +32,12 @@ export const upgradeTNT = MCFunction("custom_tnt/upgrade_tnt", () => {
   // Tier 1 is default/base TNT
 
   // Twilight Forest TNT
-  upgradeTNTGenerics("twilight.risky", "twilight.critical", 130005, "Twilight Forest TNT: Risky", "red");
-  upgradeTNTGenerics("twilight.stable", "twilight.risky", 120005, "Twilight Forest TNT: Stable", "yellow");
+  upgradeTNTGenerics("twilight.risky", "twilight.critical", 130006, "Twilight Forest TNT: Risky", "red");
+  upgradeTNTGenerics("twilight.stable", "twilight.risky", 120006, "Twilight Forest TNT: Stable", "yellow");
+  // Tier 1 is default/base TNT
+
+  // Aquatic TNT
+  upgradeTNTGenerics("aquatic.risky", "aquatic.critical", 130007, "Aquatic TNT: Risky", "red");
+  upgradeTNTGenerics("aquatic.stable", "aquatic.risky", 120007, "Aquatic TNT: Stable", "yellow");
   // Tier 1 is default/base TNT
 });
