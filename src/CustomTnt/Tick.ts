@@ -63,6 +63,11 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_aquatic_tnt_stable", "Aquatic TNT: Stable", "aquatic.stable", 110007);
       placeAndCreateFunction("give_aquatic_tnt_risky", "Aquatic TNT: Risky", "aquatic.risky", 120007);
       placeAndCreateFunction("give_aquatic_tnt_critical", "Aquatic TNT: Critical", "aquatic.critical", 130007);
+
+      // Ender TNT
+      placeAndCreateFunction("give_ender_tnt_stable", "Ender TNT: Stable", "ender.stable", 110008);
+      placeAndCreateFunction("give_ender_tnt_risky", "Ender TNT: Risky", "ender.risky", 120008);
+      placeAndCreateFunction("give_ender_tnt_critical", "Ender TNT: Critical", "ender.critical", 130008);
     });
 });
 
@@ -888,7 +893,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null
       );
 
-      // Deadly Deep TNT
+      // Aquatic TNT
       explosionHandler(
         "tnt.aquatic.stable",
         100,
@@ -1010,6 +1015,107 @@ export const handler = MCFunction("custom_tnt/handler", () => {
 
             tellraw("@a", { text: "You've got a diving suit and deep vision potion and submarine!", color: "gold" });
           });
+        },
+        null,
+        null
+      );
+
+      // Ender TNT
+      explosionHandler(
+        "tnt.ender.stable",
+        100,
+        () => {
+          particle("minecraft:portal", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 4);
+        },
+        () => {
+          particle("minecraft:poof", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Fill blocks
+          const blocks: Array<string> = ["minecraft:end_stone", "minecraft:end_stone_bricks", "cataclysm:polished_end_stone"]; // ! MOD USED
+          fillRandom([-8, -5, -8], [8, -1, 8], "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 15; i++) {
+            summon("minecraft:enderman", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] });
+            summon("cataclysm:endermaptera", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.ender.risky",
+        100,
+        () => {
+          particle("minecraft:portal", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 4);
+          particle("minecraft:soul_fire_flame", rel(0, 0.8, 0), [0.0, 0.1, 0.0], 0.1, 1);
+        },
+        () => {
+          particle("minecraft:poof", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Fill blocks
+          const blocks: Array<string> = [
+            "minecraft:end_stone",
+            "minecraft:end_stone_bricks",
+            "cataclysm:polished_end_stone",
+            "cataclysm:chorus_stem",
+          ]; // ! MOD USED
+          fillRandom([-12, -5, -12], [12, -1, 12], "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 15; i++) {
+            summon("minecraft:enderman", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] });
+          }
+          for (let i = 1; i <= 2; i++) {
+            summon("cataclysm:ender_golem", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] });
+          }
+
+          // Give items to every player
+          give("@a", "minecraft:ender_pearl", 8);
+          give("@a", "cataclysm:void_forge", 1); // ! MODS USED
+
+          tellraw("@a", { text: "You've got enderpearls and a voidforge!", color: "gold" });
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.ender.critical",
+        100,
+        () => {
+          particle("minecraft:portal", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 4);
+          particle("minecraft:soul_fire_flame", rel(0, 0.8, 0), [0.0, 0.1, 0.0], 0.1, 2);
+          particle("minecraft:block", "minecraft:end_stone", rel(0, 0.8, 0), [0.0, 0.1, 0.0], 0.1, 3);
+        },
+        () => {
+          particle("minecraft:poof", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Fill blocks
+          const blocks: Array<string> = [
+            "minecraft:end_stone",
+            "minecraft:end_stone_bricks",
+            "cataclysm:polished_end_stone",
+            "cataclysm:chorus_stem",
+            "cataclysm:void_stone",
+          ]; // ! MOD USED
+          fillRandom([-12, -5, -12], [12, -1, 12], "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 15; i++) {
+            summon("minecraft:enderman", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] });
+          }
+          for (let i = 1; i <= 3; i++) {
+            summon("cataclysm:ender_golem", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] });
+          }
+          summon("cataclysm:ender_guardian", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] });
+
+          // Give items to every player
+          give("@a", "minecraft:ender_pearl", 16);
+          give("@a", "cataclysm:void_forge", 1); // ! MODS USED
+          give("@a", "cataclysm:tidal_claws", 1); // ! MODS USED
+          give("@a", "cataclysm:void_assault_shoulder_weapon", 1); // ! MODS USED
+
+          tellraw("@a", { text: "You've got some weapons in your inventory!", color: "gold" });
         },
         null,
         null

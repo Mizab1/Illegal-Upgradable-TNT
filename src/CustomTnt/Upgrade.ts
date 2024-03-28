@@ -40,4 +40,9 @@ export const upgradeTNT = MCFunction("custom_tnt/upgrade_tnt", () => {
   upgradeTNTGenerics("aquatic.risky", "aquatic.critical", 130007, "Aquatic TNT: Risky", "red");
   upgradeTNTGenerics("aquatic.stable", "aquatic.risky", 120007, "Aquatic TNT: Stable", "yellow");
   // Tier 1 is default/base TNT
+
+  // Ender TNT
+  upgradeTNTGenerics("ender.risky", "ender.critical", 130008, "Ender TNT: Risky", "red");
+  upgradeTNTGenerics("ender.stable", "ender.risky", 120008, "Ender TNT: Stable", "yellow");
+  // Tier 1 is default/base TNT
 });
