@@ -68,6 +68,11 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_ender_tnt_stable", "Ender TNT: Stable", "ender.stable", 110008);
       placeAndCreateFunction("give_ender_tnt_risky", "Ender TNT: Risky", "ender.risky", 120008);
       placeAndCreateFunction("give_ender_tnt_critical", "Ender TNT: Critical", "ender.critical", 130008);
+
+      // Dragon TNT
+      placeAndCreateFunction("give_dragon_tnt_stable", "Dragon TNT: Stable", "dragon.stable", 110009);
+      placeAndCreateFunction("give_dragon_tnt_risky", "Dragon TNT: Risky", "dragon.risky", 120009);
+      placeAndCreateFunction("give_dragon_tnt_critical", "Dragon TNT: Critical", "dragon.critical", 130009);
     });
 });
 
@@ -1116,6 +1121,83 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           give("@a", "cataclysm:void_assault_shoulder_weapon", 1); // ! MODS USED
 
           tellraw("@a", { text: "You've got some weapons in your inventory!", color: "gold" });
+        },
+        null,
+        null
+      );
+
+      // Dragon TNT
+      explosionHandler(
+        "tnt.dragon.stable",
+        100,
+        () => {
+          particle("minecraft:block", "minecraft:grass_block", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 4);
+        },
+        () => {
+          particle("minecraft:poof", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Fill blocks
+          fill(rel(-6, -4, -6), rel(6, -1, 6), "minecraft:grass_block");
+
+          // Spawn mods
+          for (let i = 1; i <= 8; i++) {
+            summon("iceandfire:hippocampus", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("iceandfire:hippogryph", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("iceandfire:amphithere", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.dragon.risky",
+        100,
+        () => {
+          particle("minecraft:block", "minecraft:redstone_block", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 4);
+        },
+        () => {
+          particle("minecraft:poof", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Fill blocks
+          const blocks: Array<string> = ["minecraft:grass_block", "minecraft:red_terracotta"];
+          fillRandom([-8, -4, -8], [8, -1, 8], "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 8; i++) {
+            summon("iceandfire:cockatrice", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("iceandfire:stymphalian_bird", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("iceandfire:amphithere", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.dragon.critical",
+        100,
+        () => {
+          particle("minecraft:block", "minecraft:packed_ice", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 4);
+          particle("minecraft:block", "minecraft:water", rel(0, 0.8, 0), [0.3, 0.3, 0.3], 0.1, 4);
+        },
+        () => {
+          particle("minecraft:poof", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Fill blocks
+          const blocks: Array<string> = ["minecraft:water", "minecraft:packed_ice"];
+          genDiscOfBlock(15, 90, -1, "#aestd1:all_but_air", blocks, 2);
+
+          // Spawn mobs
+          for (let i = 1; i <= 8; i++) {
+            summon("iceandfire:amphithere", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("iceandfire:cockatrice", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+            summon("iceandfire:stymphalian_bird", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
+          }
+          for (let i = 1; i <= 3; i++) {
+            summon("iceandfire:ice_dragon", rel(0, 0, 0), {
+              Motion: [randomWithDec(), 0.8, randomWithDec()],
+              AgeTicks: i * 1000000,
+            }); // ! MODS USED
+          }
         },
         null,
         null

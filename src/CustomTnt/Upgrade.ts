@@ -45,4 +45,9 @@ export const upgradeTNT = MCFunction("custom_tnt/upgrade_tnt", () => {
   upgradeTNTGenerics("ender.risky", "ender.critical", 130008, "Ender TNT: Risky", "red");
   upgradeTNTGenerics("ender.stable", "ender.risky", 120008, "Ender TNT: Stable", "yellow");
   // Tier 1 is default/base TNT
+
+  // Dragon TNT
+  upgradeTNTGenerics("dragon.risky", "dragon.critical", 130009, "Dragon TNT: Risky", "red");
+  upgradeTNTGenerics("dragon.stable", "dragon.risky", 120009, "Dragon TNT: Stable", "yellow");
+  // Tier 1 is default/base TNT
 });
