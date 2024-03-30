@@ -17,6 +17,7 @@ import {
   teleport,
   tellraw,
   time,
+  weather,
 } from "sandstone";
 import { self } from "../Tick";
 import { fillRandom, genDiscOfBlock, randomIntFromInterval, randomWithDec } from "../Utils/Functions";
@@ -73,6 +74,11 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_dragon_tnt_stable", "Dragon TNT: Stable", "dragon.stable", 110009);
       placeAndCreateFunction("give_dragon_tnt_risky", "Dragon TNT: Risky", "dragon.risky", 120009);
       placeAndCreateFunction("give_dragon_tnt_critical", "Dragon TNT: Critical", "dragon.critical", 130009);
+
+      // Outvoted TNT
+      placeAndCreateFunction("give_outvoted_tnt_stable", "Outvoted TNT: Stable", "outvoted.stable", 110010);
+      placeAndCreateFunction("give_outvoted_tnt_risky", "Outvoted TNT: Risky", "outvoted.risky", 120010);
+      placeAndCreateFunction("give_outvoted_tnt_critical", "Outvoted TNT: Critical", "outvoted.critical", 130010);
     });
 });
 
@@ -1198,6 +1204,114 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               AgeTicks: i * 1000000,
             }); // ! MODS USED
           }
+        },
+        null,
+        null
+      );
+
+      // Outvoted TNT
+      explosionHandler(
+        "tnt.outvoted.stable",
+        100,
+        () => {
+          particle("minecraft:happy_villager", rel(0, 0.8, 0), [0.1, 0.5, 0.1], 0.1, 1);
+          particle("minecraft:cloud", rel(0, 0.8, 0), [0.1, 0.3, 0.1], 0.1, 1);
+        },
+        () => {
+          particle("minecraft:wax_on", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Replace the blocks
+          const blocks: Array<string> = ["minecraft:grass_block", "minecraft:redstone_lamp", "minecraft:stone_bricks"];
+          const startCoords = -8;
+          const endCoords = 8;
+          fillRandom([startCoords, -4, startCoords], [endCoords, -1, endCoords], "#aestd1:all_but_air", blocks);
+          for (let i = startCoords; i < endCoords; i++) {
+            for (let j = startCoords; j < endCoords; j++) {
+              execute
+                .positioned(rel(i, -1, j))
+                .if.block(rel(0, 0, 0), "minecraft:redstone_lamp")
+                .run.setblock(rel(0, 1, 0), "friendsandfoes:copper_button[face=floor]");
+            }
+          }
+
+          // Spawn mods
+          for (let i = 1; i <= 10; i++) {
+            summon("friendsandfoes:copper_golem", rel(0, 0, 0), { Motion: [randomWithDec(), 0.6, randomWithDec()] }); // ! MODS USED
+            summon("friendsandfoes:tuff_golem", rel(0, 0, 0), { Motion: [randomWithDec(), 0.6, randomWithDec()] }); // ! MODS USED
+            summon("friendsandfoes:moobloom", rel(0, 0, 0), { Motion: [randomWithDec(), 0.6, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.outvoted.risky",
+        100,
+        () => {
+          particle("minecraft:spore_blossom_air", rel(0, 0.8, 0), [0.1, 0.5, 0.1], 0.1, 1);
+          particle("minecraft:block", "minecraft:sandstone", rel(0, 0.8, 0), [0.1, 0.2, 0.1], 0.1, 1);
+          particle("minecraft:cloud", rel(0, 0.8, 0), [0.2, 0.3, 0.2], 0.1, 1);
+        },
+        () => {
+          particle("minecraft:happy_villager", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Replace the blocks
+          const blocks: Array<string> = [
+            "minecraft:oak_planks",
+            "minecraft:oak_stairs",
+            "minecraft:moss_block",
+            "minecraft:sandstone",
+          ];
+          const startCoords = -8;
+          const endCoords = 8;
+          fillRandom([startCoords, -4, startCoords], [endCoords, -1, endCoords], "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 10; i++) {
+            summon("friendsandfoes:glare", rel(0, 0, 0), { Motion: [randomWithDec(), 0.6, randomWithDec()] }); // ! MODS USED
+            summon("friendsandfoes:rascal", rel(0, 0, 0), { Motion: [randomWithDec(), 0.6, randomWithDec()] }); // ! MODS USED
+            summon("friendsandfoes:mauler", rel(0, 0, 0), { Motion: [randomWithDec(), 0.6, randomWithDec()] }); // ! MODS USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.outvoted.critical",
+        100,
+        () => {
+          particle("minecraft:flame", rel(0, 0.8, 0), [0.1, 0.5, 0.1], 0.05, 3);
+          particle("minecraft:block", "minecraft:snow", rel(0, 0.8, 0), [0.1, 0.2, 0.1], 0.1, 3);
+          particle("minecraft:item", "minecraft:rotten_flesh", rel(0, 0.8, 0), [0.2, 0.3, 0.2], 0.1, 3);
+        },
+        () => {
+          particle("minecraft:damage_indicator", rel(0, 1, 0), [10, 2, 10], 0.1, 500);
+
+          // Replace the blocks
+          const blocks: Array<string> = [
+            "minecraft:packed_ice",
+            "minecraft:snow",
+            "minecraft:netherrack",
+            "minecraft:grass_block",
+            "minecraft:red_nether_bricks",
+          ];
+          const startCoords = -8;
+          const endCoords = 8;
+          fillRandom([startCoords, -4, startCoords], [endCoords, -1, endCoords], "#aestd1:all_but_air", blocks);
+
+          // Spawn mods
+          for (let i = 1; i <= 6; i++) {
+            summon("friendsandfoes:iceologer", rel(0, 0, 0), { Motion: [randomWithDec(), 0.6, randomWithDec()] }); // ! MODS USED
+            summon("friendsandfoes:wildfire", rel(0, 0, 0), {
+              Motion: [randomWithDec(), 0.6, randomWithDec()],
+              ActiveShieldsCount: 4,
+            }); // ! MODS USED
+            summon("minecraft:zombie_horse", rel(0, 0, 0), { Motion: [randomWithDec(), 0.6, randomWithDec()] });
+          }
+
+          // Change the weather
+          // @ts-ignore
+          weather.thunder("120s");
         },
         null,
         null
