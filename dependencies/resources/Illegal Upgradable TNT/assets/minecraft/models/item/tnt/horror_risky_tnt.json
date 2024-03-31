@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "custom/tnt/horror_tnt_bottom",
-		"1": "custom/tnt/horror_risky_tnt_side",
-		"2": "custom/tnt/horror_tnt_top",
-		"particle": "custom/tnt/horror_tnt_bottom"
+		"0": "custom/tnt/horror/horror_tnt_bottom",
+		"1": "custom/tnt/horror/horror_risky_tnt_side",
+		"2": "custom/tnt/horror/horror_tnt_top",
+		"particle": "custom/tnt/horror/horror_tnt_bottom"
 	},
 	"elements": [
 		{

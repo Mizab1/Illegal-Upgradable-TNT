@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "custom/tnt/acid/acid_tnt_bottom",
-		"1": "custom/tnt/acid/acid_critical_tnt_side",
-		"2": "custom/tnt/acid/acid_tnt_top",
-		"particle": "custom/tnt/acid/acid_tnt_bottom"
+		"0": "custom/tnt/aquatic/aquatic_tnt_bottom",
+		"1": "custom/tnt/aquatic/aquatic_stable_tnt_side",
+		"2": "custom/tnt/aquatic/aquatic_tnt_top",
+		"particle": "custom/tnt/aquatic/aquatic_tnt_bottom"
 	},
 	"elements": [
 		{
