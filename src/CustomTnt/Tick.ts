@@ -506,6 +506,12 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           // @ts-ignore
           particle("minecraft:dust", [0, 1, 0], 3, rel(0, 0.8, 0), [10, 10, 10], 0.1, 1000);
 
+          fillRandom([-20, -3, -20], [20, -1, 20], "#aestd1:all_but_air", [
+            "minecraft:cobblestone",
+            "minecraft:mossy_cobblestone",
+            "minecraft:cobbled_deepslate",
+            "minecraft:cobblestone_slab",
+          ]);
           // Spawn mods
           for (let i = 1; i <= 4; i++) {
             summon("alexscaves:tremorsaurus", rel(0, 0, 0), { Motion: [randomWithDec(), 0.8, randomWithDec()] }); // ! MODS USED
