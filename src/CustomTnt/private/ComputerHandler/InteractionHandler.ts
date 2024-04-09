@@ -117,7 +117,13 @@ export const upgradeTNTGenerics = (
         particle("minecraft:falling_dust", "minecraft:lime_concrete", rel(0, 1, 0), [0.5, 0.5, 0.5], 0.8, 200);
 
         // Play sound
-        playsound("minecraft:block.note_block.bell", "master", "@a", rel(0, 0, 0), 1, 1);
+        if (nextTNTTag.includes("critical")) {
+          playsound("minecraft:sfx.critical_warn", "master", "@a", rel(0, 0, 0), 0.3, 1.2);
+        } else if (nextTNTTag.includes("risky")) {
+          playsound("minecraft:sfx.risky_warn", "master", "@a", rel(0, 0, 0), 1, 1);
+        } else {
+          playsound("minecraft:block.note_block.bell", "master", "@a", rel(0, 0, 0), 1, 1);
+        }
 
         // Stop the sounds
         stopsound("@a", "master", "minecraft:sfx.typing");
