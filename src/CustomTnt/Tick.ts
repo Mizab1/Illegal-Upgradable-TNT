@@ -1030,7 +1030,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             give("@a", "alexscaves:submarine", 1); // ! MODS USED
             raw(`give @p potion{Potion:"alexscaves:deepsight"} 4`); // ! MODS USED
 
-            tellraw("@a", { text: "You've got a diving suit and deep vision potion and submarine!", color: "gold" });
+            tellraw("@a", { text: "There is a submarine in your inventory!", color: "gold" });
           });
         },
         null,
