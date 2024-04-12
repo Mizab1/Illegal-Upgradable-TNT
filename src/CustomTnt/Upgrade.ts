@@ -55,4 +55,9 @@ export const upgradeTNT = MCFunction("custom_tnt/upgrade_tnt", () => {
   upgradeTNTGenerics("outvoted.risky", "outvoted.critical", 130010, "Outvoted TNT: Risky", "red");
   upgradeTNTGenerics("outvoted.stable", "outvoted.risky", 120010, "Outvoted TNT: Stable", "yellow");
   // Tier 1 is default/base TNT
+
+  // Disaster TNT
+  upgradeTNTGenerics("disaster.risky", "disaster.critical", 130011, "Disaster TNT: Risky", "red");
+  upgradeTNTGenerics("disaster.stable", "disaster.risky", 120011, "Disaster TNT: Stable", "yellow");
+  // Tier 1 is default/base TNT
 });

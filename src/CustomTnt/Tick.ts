@@ -79,6 +79,11 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_outvoted_tnt_stable", "Outvoted TNT: Stable", "outvoted.stable", 110010);
       placeAndCreateFunction("give_outvoted_tnt_risky", "Outvoted TNT: Risky", "outvoted.risky", 120010);
       placeAndCreateFunction("give_outvoted_tnt_critical", "Outvoted TNT: Critical", "outvoted.critical", 130010);
+
+      // Disaster TNT
+      placeAndCreateFunction("give_disaster_tnt_stable", "Disaster TNT: Stable", "disaster.stable", 110011);
+      placeAndCreateFunction("give_disaster_tnt_risky", "Disaster TNT: Risky", "disaster.risky", 120011);
+      placeAndCreateFunction("give_disaster_tnt_critical", "Disaster TNT: Critical", "disaster.critical", 130011);
     });
 });
 
@@ -1318,6 +1323,60 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           // Change the weather
           // @ts-ignore
           weather.thunder("120s");
+        },
+        null,
+        null
+      );
+
+      // Disaster TNT
+      explosionHandler(
+        "tnt.disaster.stable",
+        100,
+        () => {
+          particle("minecraft:smoke", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 3);
+        },
+        () => {
+          // Spawn the meteor disaster
+          for (let i = 0; i < 5; i++) {
+            summon("luckytntmod:meteor_shower", rel(0, -2, 0), { Fuse: 200 }); // ! MOD USED
+          }
+
+          tellraw(Selector("@a", { distance: [Infinity, 20] }), { text: "Look Up!", color: "red" });
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.disaster.risky",
+        100,
+        () => {
+          particle("minecraft:smoke", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 2);
+          particle("minecraft:block", "minecraft:dirt", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 3);
+        },
+        () => {
+          // Spawn the earthquake disaster
+          for (let i = 0; i < 2; i++) {
+            summon("luckytntmod:earthquake_tnt", rel(0, 0, 0), { Fuse: 200 }); // ! MOD USED
+          }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.disaster.critical",
+        100,
+        () => {
+          particle("minecraft:lava", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 2);
+          particle("minecraft:block", "minecraft:magma_block", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 3);
+          // particle("minecraft:splash", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 3);
+          // particle("minecraft:block", "minecraft:water", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 3);
+        },
+        () => {
+          // Spawn the volcano disaster
+          for (let i = 0; i < 3; i++) {
+            summon("luckytntmod:pompeii", rel(0, 0, 0), { Fuse: 200 }); // ! MOD USED
+            // summon("luckytntmod:poseidons_wave", rel(0, 10, 0)); // ! MOD USED
+          }
         },
         null,
         null
