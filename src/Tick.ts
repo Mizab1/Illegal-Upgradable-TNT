@@ -43,3 +43,6 @@ const tick = MCFunction(
   },
   { runEachTick: true }
 );
+
+// Instructions
+// summon text_display ~ ~-2 ~ {billboard:"vertical",alignment:"left",Tags:["instructions"],text:'[{"text":": Instructions to upgrade the TNTs :\\n","color":"gold"},{"text":"1. Place the TNT on the ground\\n","color":"white"},{"text":"2. Place the Laptop on top of the TNT\\n","color":"white"},{"text":"3. Right Click on the Laptop\\n","color":"white"},{"text":"4. Upgrade sequence will start","color":"white"}]'}
