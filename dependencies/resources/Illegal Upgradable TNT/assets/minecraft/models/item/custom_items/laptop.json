@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"1": "custom/custom_items/laptop_screen",
-		"texture": "custom/custom_items/laptop",
-		"particle": "custom/custom_items/laptop_screen"
+		"particle": "custom/custom_items/laptop_screen",
+		"texture": "custom/custom_items/laptop"
 	},
 	"elements": [
 		{
@@ -1302,6 +1302,10 @@
 		"head": {
 			"translation": [0, 11.75, 0],
 			"scale": [1.5, 1.5, 1.5]
+		},
+		"fixed": {
+			"rotation": [150.12, 25.11, 178.67],
+			"translation": [0.75, 3.75, -9]
 		}
 	}
 }
