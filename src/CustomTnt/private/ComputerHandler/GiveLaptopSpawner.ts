@@ -8,6 +8,9 @@ const giveLaptopSpawner = MCFunction("items/give_laptop", () => {
     i("minecraft:endermite_spawn_egg", {
       CustomModelData: 100001,
       EntityTag: { Silent: NBT.byte(1), NoAI: NBT.byte(1), Tags: ["tnt.laptop.spawner"] },
+      display: {
+        Name: `{"text":"Laptop","color":"green","italic":false}`,
+      },
     })
   );
 });
