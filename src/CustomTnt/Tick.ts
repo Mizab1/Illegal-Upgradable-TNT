@@ -8,6 +8,7 @@ import {
   give,
   kill,
   particle,
+  playsound,
   raw,
   rel,
   schedule,
@@ -21,6 +22,7 @@ import {
 } from "sandstone";
 import { self } from "../Tick";
 import { fillRandom, genDiscOfBlock, randomIntFromInterval, randomWithDec } from "../Utils/Functions";
+import { shakeTimer } from "./Auxillary/DisasterRiskyTnt";
 import { TNT_PARENT_ENTITY, explosionHandler, placeAndCreateFunction } from "./Private/SetupGenerics";
 
 export const setTntblock = MCFunction("custom_tnt/setblock", () => {
@@ -1341,6 +1343,20 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             summon("luckytntmod:meteor_shower", rel(0, -2, 0), { Fuse: 200 }); // ! MOD USED
           }
 
+          // Play the sounds at the meteor
+          schedule.function(
+            () => {
+              execute
+                .as("@a")
+                .at(self)
+                .run(() => {
+                  playsound("minecraft:sfx.falling_meteor", "master", self, rel(0, 0, 0));
+                });
+            },
+            "30t",
+            "append"
+          );
+
           tellraw(Selector("@a", { distance: [Infinity, 20] }), { text: "Look Up!", color: "red" });
         },
         null,
@@ -1354,10 +1370,46 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           particle("minecraft:block", "minecraft:dirt", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 3);
         },
         () => {
-          // Spawn the earthquake disaster
-          for (let i = 0; i < 2; i++) {
-            summon("luckytntmod:earthquake_tnt", rel(0, 0, 0), { Fuse: 200 }); // ! MOD USED
-          }
+          // Spawn marker
+          summon("minecraft:armor_stand", rel(0, 0, 0), {
+            Invisible: NBT.byte(1),
+            Marker: NBT.byte(1),
+            Tags: ["tnt.disaster.risky.marker"],
+          });
+
+          // Apply the Shake effect
+          shakeTimer.add(20 * 5);
+
+          // Play sounds
+          execute
+            .as("@a")
+            .at("@s")
+            .run(() => {
+              playsound("minecraft:sfx.earthquake_sound", "master", self, rel(0, 0, 0));
+            });
+
+          // Delay the earthquake TNT
+          schedule.function(
+            () => {
+              execute
+                .as(Selector("@e", { type: "minecraft:armor_stand", tag: "tnt.disaster.risky.marker" }))
+                .at(self)
+                .run(() => {
+                  // Spawn the earthquake disaster
+                  for (let i = 0; i < 2; i++) {
+                    summon("luckytntmod:earthquake_tnt", rel(0, 0, 0), { Fuse: 200 }); // ! MOD USED
+                  }
+
+                  // Play sound
+                  playsound("minecraft:sfx.earthquake_sound", "master", self, rel(0, 0, 0), 2);
+
+                  // Kill the marker
+                  kill(Selector("@e", { type: "minecraft:armor_stand", tag: "tnt.disaster.risky.marker" }));
+                });
+            },
+            "5s",
+            "replace"
+          );
         },
         null,
         null
