@@ -18,6 +18,7 @@
         {"predicate": {"custom_model_data":110008}, "model":"item/tnt/ender_stable_tnt"},
         {"predicate": {"custom_model_data":110009}, "model":"item/tnt/dragon_stable_tnt"},
         {"predicate": {"custom_model_data":110010}, "model":"item/tnt/outvoted_stable_tnt"},
+        {"predicate": {"custom_model_data":110011}, "model":"item/tnt/disaster_stable_tnt"},
         
         {"predicate": {"custom_model_data":120001}, "model":"item/tnt/acid_risky_tnt"},
         {"predicate": {"custom_model_data":120002}, "model":"item/tnt/horror_risky_tnt"},
@@ -29,6 +30,7 @@
         {"predicate": {"custom_model_data":120008}, "model":"item/tnt/ender_risky_tnt"},
         {"predicate": {"custom_model_data":120009}, "model":"item/tnt/dragon_risky_tnt"},
         {"predicate": {"custom_model_data":120010}, "model":"item/tnt/outvoted_risky_tnt"},
+        {"predicate": {"custom_model_data":120011}, "model":"item/tnt/disaster_risky_tnt"},
         
         {"predicate": {"custom_model_data":130001}, "model":"item/tnt/acid_critical_tnt"},
         {"predicate": {"custom_model_data":130002}, "model":"item/tnt/horror_critical_tnt"},
@@ -39,7 +41,8 @@
         {"predicate": {"custom_model_data":130007}, "model":"item/tnt/aquatic_critical_tnt"},
         {"predicate": {"custom_model_data":130008}, "model":"item/tnt/ender_critical_tnt"},
         {"predicate": {"custom_model_data":130009}, "model":"item/tnt/dragon_critical_tnt"},
-        {"predicate": {"custom_model_data":130010}, "model":"item/tnt/outvoted_critical_tnt"}
+        {"predicate": {"custom_model_data":130010}, "model":"item/tnt/outvoted_critical_tnt"},
+        {"predicate": {"custom_model_data":130011}, "model":"item/tnt/disaster_critical_tnt"}
     ]
 }
 
